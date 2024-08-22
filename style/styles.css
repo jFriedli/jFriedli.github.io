@@ -64,6 +64,18 @@ body:before {
 
 /* Centering and Resizing the Main Content */
 .content-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* Stack top-links and main-content vertically */
+    justify-content: flex-start;
+    align-items: center; /* Center horizontally */
+    padding-top: 20px; /* Padding from the top */
+    z-index: 1; /* Ensure content is above the grid background */
+    position: relative; /* Necessary to maintain layering */
+    padding-bottom: 20px; /* Adds space at the bottom of the content */
+}
+
+.blog-container {
     display: flex;
     flex-direction: column; /* Stack top-links and main-content vertically */
     justify-content: flex-start;
@@ -393,9 +405,147 @@ code {
     border: 1px solid white;
     padding: 10px;
     border-radius: 5px;
+    tab-size: 4;
 }
 
 .lead {
     font-size: 20px; /* Adjust the size as needed */
     font-weight: bold;
+}
+
+/* Existing styles remain unchanged */
+
+/* Mobile Adjustments */
+@media screen and (max-width: 600px) {
+    .terminal-window {
+        width: 90%;
+        max-width: 100%;
+        height: 250px;
+    }
+
+    .terminal-window section.terminal {
+        font-size: 8pt;
+    }
+
+    .top-links {
+        width: 100%;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+    }
+
+    .top-links ul li {
+        margin: 0 5px;
+        padding-right: 10px;
+        border-right-width: 1px;
+    }
+
+    .top-links ul li:last-child {
+        padding-right: 0;
+    }
+
+    .subtitle {
+        font-size: 1.5em;
+    }
+
+    .content-container {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .site-rule p {
+        font-size: 0.9rem;
+    }
+    .floating-cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        justify-items: center;
+    }
+
+    .card-container {
+        max-height: 120px; /* Smaller card size */
+        max-width: 100px; /* Smaller card size */
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 100%;
+        aspect-ratio: 1 / 1; /* Maintain square aspect ratio */
+        background-size: cover;
+        background-position: center;
+    }
+
+    .music-links {
+        margin-top: 5px;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .music-links img {
+        width: 16px;
+        height: 16px;
+    }
+
+    .site-rule {
+        width: 80%;
+    }
+    .blog-container {
+        padding: 10px;
+    }
+
+    .top-links {
+        width: 100%;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+    }
+
+    .top-links ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .top-links ul li {
+        flex: 1 1 auto;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    .main-content {
+        width: 100%;
+        padding: 10px;
+        box-shadow: none;
+        background-color: rgba(18, 53, 36, 0.9);
+        border-radius: 10px;
+    }
+
+    .subtitle {
+        font-size: 1.5em;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .content {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+
+    .lead {
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-top: 20px;
+        display: block;
+    }
+
+    code {
+        font-size: 1rem;
+    }
 }

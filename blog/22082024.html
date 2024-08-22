@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floating Div with Grid Background</title>
+    <link rel="stylesheet" href="../style/styles.css">
+    <!-- Load the atom-one-dark theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- Load the Java language syntax highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body>
+    <div class="content-container">
+        <div class="top-links">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../music.html">Music</a></li>
+                <li><a href="../publications.html">Publications</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="content">
+                <div class="subtitle">An (mildly) interesting XSS vector</div>
+                <span class="lead">Context</span><br><br>
+                Consider a web application endpoint:
+<br><br>
+                <pre><code class="language-bash">
+https://pequod.ship?item_function_suffix=group<br><br>
+            </code></pre><br>
+            This URL generates a button within the DOM, such as:
+
+            <br><br>
+                <pre><code class="language-html">
+&lt;button onclick=&quot;add_new_{item_function_suffix}()&quot;&gt;Add&lt;/button&gt;
+                </code></pre><br>
+                The server-side code might look something like this:
+
+<br><br>
+                <pre><code class="language-python">
+@app.route('/')
+def dynamic_button():
+    # Get the 'item_function_suffix' parameter from the URL
+    item_function_suffix = request.args.get('item_function_suffix', 'default')
+    
+    # Sanitize
+    item_function_suffix = item_function_suffix.replace('"', '').replace("'", '')
+
+    # Generate the HTML for the button with a dynamic onclick attribute
+    button_html = f&#39;&lt;button onclick=&quot;add_new_{item_function_suffix}()&quot;&gt;Click me&lt;/button&gt;&#39;
+    
+    return button_html
+                </code></pre><br>
+                In this setup, quotation marks are sanitized, preventing injection attacks that work outside the context of the <i>onclick</i> attribute. However, it's still possible to inject JavaScript code.
+<br><br>
+                <span class="lead">Exploit</span><br><br>
+                A direct approach to injecting JavaScript via the item_function_suffix parameter is challenging because any syntax error in the static portion of the function name ("<i>add_new_</i>") would cause an exception, preventing the execution of the injected payload. Simply appending commands with a semicolon (;) is not effective, as it could lead to uncaught reference exceptions.<br><br>
+                To bypass this, we can manipulate the function name by closing it prematurely and appending the XSS payload. JavaScript’s untyped nature allows for a simple yet powerful solution: <b>assigning the static portion of the function name to an arbitrary value using the following injection.</b><br><br>
+                <pre><code class="language-javascript">
+={};alert(0);//
+            </code></pre><br>
+
+            This injection modifies the output to:<br><br>
+            <pre><code class="language-html">
+&lt;button onclick=&quot;add_new_={};alert(0);//()&quot;&gt;Add&lt;/button&gt;
+            </code></pre><br>
+
+            This works because JavaScript does not require variable declarations like <i>var</i>, allowing the injection to execute arbitrary code. However, this technique is limited to static strings that contain characters valid in JavaScript variable names.<br>
+            For more information on the chaos that is allowed characters in JavaScript identifiers (because apparently, anything goes), check out this <a href="https://mathiasbynens.be/notes/javascript-identifiers" target="_blank">guide</a>. 
+            </div>
+        </div>
+    </div>
+</body>
+</html>

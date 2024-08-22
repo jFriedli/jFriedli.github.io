@@ -5,12 +5,17 @@
     box-sizing: border-box;
 }
 
-body, html {
+body,
+html {
     height: 100%;
-    font-family: 'Courier New', Courier, monospace; /* Retro font */
-    color: #E1DEE3; /* Retro text color */
-    overflow-y: auto; /* Enable vertical scrolling */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    font-family: 'Courier New', Courier, monospace;
+    /* Retro font */
+    color: #E1DEE3;
+    /* Retro text color */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+    overflow-x: hidden;
+    /* Prevent horizontal scrolling */
     background-color: black;
     position: relative;
 }
@@ -18,32 +23,39 @@ body, html {
 /* Screen Lines Background Effect */
 body:before {
     content: "";
-    position: fixed; /* Make sure it covers the entire screen */
+    position: fixed;
+    /* Make sure it covers the entire screen */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-image: linear-gradient(rgba(0, 0, 0, 0.1) 50%, transparent 50%);
-    background-size: 100% 4px; /* Adjust the second value to change line thickness */
-    pointer-events: none; /* Allow interaction with underlying content */
-    z-index: 9999; /* Ensure it's on top of everything */
+    background-size: 100% 4px;
+    /* Adjust the second value to change line thickness */
+    pointer-events: none;
+    /* Allow interaction with underlying content */
+    z-index: 9999;
+    /* Ensure it's on top of everything */
 }
 
 /* Grid Background with Animation */
 .grid-wrap {
-    height: 70%; /* Covers 70% of the screen */
+    height: 70%;
+    /* Covers 70% of the screen */
     width: 100%;
     overflow: hidden;
     position: absolute;
-    bottom: 0; /* Aligns the grid to the bottom */
-    border-top: 1px solid #294939; /* Updated grid color */
+    bottom: 0;
+    /* Aligns the grid to the bottom */
+    border-top: 1px solid #294939;
+    /* Updated grid color */
     transform: perspective(150px) rotateX(45deg);
 }
 
 .grid {
     background-color: transparent;
-    background-image: linear-gradient(0deg, transparent 24%, #294939 25%, #294939 26%, transparent 27%, transparent 74%, #294939 75%, #294939 76%, transparent 77%, transparent), 
-                      linear-gradient(90deg, transparent 24%, #294939 25%, #294939 26%, transparent 27%, transparent 74%, #294939 75%, #294939 76%, transparent 77%, transparent);
+    background-image: linear-gradient(0deg, transparent 24%, #294939 25%, #294939 26%, transparent 27%, transparent 74%, #294939 75%, #294939 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, #294939 25%, #294939 26%, transparent 27%, transparent 74%, #294939 75%, #294939 76%, transparent 77%, transparent);
     height: 200%;
     width: 100%;
     background-size: 50px 50px;
@@ -57,6 +69,7 @@ body:before {
     0% {
         transform: translateY(0);
     }
+
     100% {
         transform: translateY(-50px);
     }
@@ -66,49 +79,72 @@ body:before {
 .content-container {
     text-align: center;
     display: flex;
-    flex-direction: column; /* Stack top-links and main-content vertically */
+    flex-direction: column;
+    /* Stack top-links and main-content vertically */
     justify-content: flex-start;
-    align-items: center; /* Center horizontally */
-    padding-top: 20px; /* Padding from the top */
-    z-index: 1; /* Ensure content is above the grid background */
-    position: relative; /* Necessary to maintain layering */
-    padding-bottom: 20px; /* Adds space at the bottom of the content */
+    align-items: center;
+    /* Center horizontally */
+    padding-top: 20px;
+    /* Padding from the top */
+    z-index: 1;
+    /* Ensure content is above the grid background */
+    position: relative;
+    /* Necessary to maintain layering */
+    padding-bottom: 20px;
+    /* Adds space at the bottom of the content */
 }
 
 .blog-container {
     display: flex;
-    flex-direction: column; /* Stack top-links and main-content vertically */
+    flex-direction: column;
+    /* Stack top-links and main-content vertically */
     justify-content: flex-start;
-    align-items: center; /* Center horizontally */
-    padding-top: 20px; /* Padding from the top */
-    z-index: 1; /* Ensure content is above the grid background */
-    position: relative; /* Necessary to maintain layering */
-    padding-bottom: 20px; /* Adds space at the bottom of the content */
+    align-items: center;
+    /* Center horizontally */
+    padding-top: 20px;
+    /* Padding from the top */
+    z-index: 1;
+    /* Ensure content is above the grid background */
+    position: relative;
+    /* Necessary to maintain layering */
+    padding-bottom: 20px;
+    /* Adds space at the bottom of the content */
 }
 
 a {
-    color: #DEC3BE; /* Link color */
+    color: #DEC3BE;
+    /* Link color */
     text-decoration: none;
     font-weight: bold;
-    transition: color 0.3s ease; /* Smooth color transition */
+    transition: color 0.3s ease;
+    /* Smooth color transition */
 }
 
 /* Optional: Hover effect for links */
 a:hover {
-    color: #E1DEE3; /* Change the color on hover */
+    color: #E1DEE3;
+    /* Change the color on hover */
 }
 
 /* Styling the top links box */
 .top-links {
-    background-color: rgba(18, 53, 36, 0.9); /* Same background color as the main content */
-    width: 70%; /* Matches the width of the main content */
-    max-width: 1000px; /* Align with main content max width */
-    padding: 10px 20px; /* Padding inside the box */
-    margin-bottom: 20px; /* Space between this box and the main content */
-    border-radius: 15px; /* Same rounded edges */
-    box-shadow: 0px 0px 20px rgba(201, 224, 202, 0.5); /* Same shadow effect */
+    background-color: rgba(18, 53, 36, 0.9);
+    /* Same background color as the main content */
+    width: 70%;
+    /* Matches the width of the main content */
+    max-width: 1000px;
+    /* Align with main content max width */
+    padding: 10px 20px;
+    /* Padding inside the box */
+    margin-bottom: 20px;
+    /* Space between this box and the main content */
+    border-radius: 15px;
+    /* Same rounded edges */
+    box-shadow: 0px 0px 20px rgba(201, 224, 202, 0.5);
+    /* Same shadow effect */
     display: flex;
-    justify-content: space-around; /* Space out the links horizontally */
+    justify-content: space-around;
+    /* Space out the links horizontally */
     align-items: center;
 }
 
@@ -121,51 +157,102 @@ a:hover {
 }
 
 .top-links ul li {
-    margin: 0 15px; /* Space between links */
-    border-right: 2px solid #294939; /* Border between links */
+    margin: 0 15px;
+    /* Space between links */
+    border-right: 2px solid #294939;
+    /* Border between links */
     padding-right: 15px;
 }
 
 .top-links ul li:last-child {
-    border-right: none; /* Remove border from the last item */
+    border-right: none;
+    /* Remove border from the last item */
 }
 
 .top-links ul li a {
-    color: #DEC3BE; /* Link color */
+    color: #DEC3BE;
+    /* Link color */
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
 }
 
 .top-links ul li a:hover {
-    color: #7fb98f; /* Hover color */
+    color: #7fb98f;
+    /* Hover color */
 }
 
 /* Adjust the main content for scrolling */
 .main-content {
-    background-color: rgba(18, 53, 36, 0.9); /* Background color with transparency */
-    width: 70%; /* Set a width that works with your design */
-    max-width: 1000px; /* Increased max width */
-    padding: 30px; /* Increased padding */
+    background-color: rgba(18, 53, 36, 0.9);
+    /* Background color with transparency */
+    width: 70%;
+    /* Set a width that works with your design */
+    max-width: 1000px;
+    /* Increased max width */
+    padding: 30px;
+    /* Increased padding */
     border-radius: 15px;
     box-shadow: 0px 0px 20px rgba(201, 224, 202, 0.5);
     display: flex;
-    flex-direction: column; /* Changed to column for vertical stacking */
+    flex-direction: column;
+    /* Changed to column for vertical stacking */
     position: relative;
-    overflow-y: auto; /* Allow content to scroll if it exceeds the container height */
+    overflow-y: auto;
+    /* Allow content to scroll if it exceeds the container height */
 }
+
+.opaque-content {
+    position: relative;
+    /* Necessary for the absolute positioning of the pseudo-element */
+    width: 70%;
+    /* Set a width that works with your design */
+    max-width: 1000px;
+    /* Maximum width */
+    padding: 30px;
+    /* Padding inside the div */
+    border-radius: 15px;
+    /* Rounded corners */
+    background-color: transparent;
+    /* Ensure the background is transparent */
+}
+
+.opaque-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(18, 53, 36, 0.5);
+    /* Background color with transparency */
+    z-index: 0;
+    /* Ensure the background is behind the content */
+    border-radius: 15px;
+    /* Ensure the border radius matches the parent */
+}
+
+.opaque-content>* {
+    position: relative;
+    z-index: 1;
+    /* Ensure content is above the pseudo-element background */
+}
+
+
 
 .subtitle {
     font-size: 2em;
     margin: 30px 0;
     text-align: center;
-    z-index: 2; /* Ensure it is in front of the grid */
+    z-index: 2;
+    /* Ensure it is in front of the grid */
 }
 
 .floating-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 50px 1px; /* 10px for vertical gap, 20px for horizontal gap */
+    gap: 50px 1px;
+    /* 10px for vertical gap, 20px for horizontal gap */
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
@@ -217,7 +304,7 @@ a:hover {
 
 .card:hover {
     transition-duration: 150ms;
-    box-shadow: 0 5px 20px 5px #00000044;
+    box-shadow: 0px 0px 20px rgba(201, 224, 202, 0.5);
     transform: scale(1.05);
 }
 
@@ -250,13 +337,17 @@ a:hover {
 /* Terminal Window Styles */
 .terminal-window {
     text-align: left;
-    width: 100%; /* Set to 100% to fit the main-content width */
-    max-width: 600px; /* Maintain a max-width */
+    width: 100%;
+    /* Set to 100% to fit the main-content width */
+    max-width: 600px;
+    /* Maintain a max-width */
     height: 360px;
     border-radius: 10px;
-    margin: 20px auto; /* Center within the main-content and add margin */
+    margin: 20px auto;
+    /* Center within the main-content and add margin */
     position: relative;
-    z-index: 2; /* Ensure it stays above the grid background */
+    z-index: 2;
+    /* Ensure it stays above the grid background */
 }
 
 .terminal-window header {
@@ -308,48 +399,90 @@ a:hover {
 }
 
 @keyframes blink {
-    0% { opacity: 1; }
-    50% { opacity: 0; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 @-webkit-keyframes blink {
-    0% { opacity: 1; }
-    50% { opacity: 0; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 @-moz-keyframes blink {
-    0% { opacity: 1; }
-     50% { opacity: 0; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
-.terminal-data { 
-    display: none; 
+.terminal-data {
+    display: none;
 }
 
-.terminal-window .gray { 
-    color: gray; 
+.terminal-window .gray {
+    color: gray;
 }
 
-.terminal-window .green { 
-    color: green; 
+.terminal-window .green {
+    color: green;
 }
 
 .blinking-cursor {
     display: inline-block;
-    width: 2px; /* Width of the cursor to resemble a pipe */
-    height: 1em; /* Height of the cursor to match text size */
-    background-color: #E1DEE3; /* Initial color of the cursor */
-    animation: blink 1.5s step-end infinite; /* Slower blinking */
-    margin-left: 5px; /* Adjust space between the prompt and cursor */
-    vertical-align: middle; /* Align with the text */
+    width: 2px;
+    /* Width of the cursor to resemble a pipe */
+    height: 1em;
+    /* Height of the cursor to match text size */
+    background-color: #E1DEE3;
+    /* Initial color of the cursor */
+    animation: blink 1.5s step-end infinite;
+    /* Slower blinking */
+    margin-left: 5px;
+    /* Adjust space between the prompt and cursor */
+    vertical-align: middle;
+    /* Align with the text */
 }
 
 @keyframes blink {
-    0%, 50%, 100% { background-color: #E1DEE3; } /* Cursor visible */
-    25%, 75% { background-color: transparent; } /* Cursor invisible */
+
+    0%,
+    50%,
+    100% {
+        background-color: #E1DEE3;
+    }
+
+    /* Cursor visible */
+    25%,
+    75% {
+        background-color: transparent;
+    }
+
+    /* Cursor invisible */
 }
 
 .site-rule {
@@ -380,25 +513,33 @@ a:hover {
 
 .log-entry {
     display: flex;
-    flex-direction: column; /* Stack date and link vertically */
-    align-items: center; /* Center the date and link */
-    margin: 10px 0; /* Space between log entries */
+    flex-direction: column;
+    /* Stack date and link vertically */
+    align-items: center;
+    /* Center the date and link */
+    margin: 10px 0;
+    /* Space between log entries */
     text-align: center;
 }
 
 .log-entry .date {
-    font-weight: bold; /* Make the date bold */
-    margin-bottom: 5px; /* Space between date and link */
+    font-weight: bold;
+    /* Make the date bold */
+    margin-bottom: 5px;
+    /* Space between date and link */
 }
 
 .log-entry a {
-    color: #DEC3BE; /* Link color */
+    color: #DEC3BE;
+    /* Link color */
     text-decoration: none;
-    transition: color 0.3s ease; /* Smooth color transition */
+    transition: color 0.3s ease;
+    /* Smooth color transition */
 }
 
 .log-entry a:hover {
-    color: #E1DEE3; /* Change the color on hover */
+    color: #E1DEE3;
+    /* Change the color on hover */
 }
 
 code {
@@ -409,7 +550,8 @@ code {
 }
 
 .lead {
-    font-size: 20px; /* Adjust the size as needed */
+    font-size: 20px;
+    /* Adjust the size as needed */
     font-weight: bold;
 }
 
@@ -455,6 +597,7 @@ code {
     .site-rule p {
         font-size: 0.9rem;
     }
+
     .floating-cards {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -466,8 +609,10 @@ code {
     }
 
     .card-container {
-        max-height: 120px; /* Smaller card size */
-        max-width: 100px; /* Smaller card size */
+        max-height: 120px;
+        /* Smaller card size */
+        max-width: 100px;
+        /* Smaller card size */
         position: relative;
         display: flex;
         flex-direction: column;
@@ -476,7 +621,8 @@ code {
 
     .card {
         width: 100%;
-        aspect-ratio: 1 / 1; /* Maintain square aspect ratio */
+        aspect-ratio: 1 / 1;
+        /* Maintain square aspect ratio */
         background-size: cover;
         background-position: center;
     }
@@ -496,6 +642,7 @@ code {
     .site-rule {
         width: 80%;
     }
+
     .blog-container {
         padding: 10px;
     }
@@ -523,6 +670,13 @@ code {
         padding: 10px;
         box-shadow: none;
         background-color: rgba(18, 53, 36, 0.9);
+        border-radius: 10px;
+    }
+
+    .opaque-content {
+        width: 100%;
+        padding: 10px;
+        box-shadow: none;
         border-radius: 10px;
     }
 

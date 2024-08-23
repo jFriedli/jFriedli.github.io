@@ -644,10 +644,22 @@ code {
     .card {
         width: 100%;
         aspect-ratio: 1 / 1;
-        /* Maintain square aspect ratio */
         background-size: cover;
         background-position: center;
     }
+
+    .card .speaker-icon {
+        opacity: 0.5; /* Speaker icon always visible on mobile */
+    }
+
+    .card.active .speaker-icon {
+        opacity: 1; /* Speaker icon fully visible when active */
+    }
+
+    .card:hover .speaker-icon {
+        opacity: 0.5; /* No hover effect needed on mobile */
+    }
+
 
     .music-links {
         margin-top: 5px;

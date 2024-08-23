@@ -46,3 +46,37 @@ cards.forEach($card => {
     $card.querySelector('.glow').style.backgroundImage = '';
   });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.card');
+  let activeCard = null;
+
+  cards.forEach(card => {
+      const audio = card.querySelector('.card-audio');
+      const speakerIcon = card.querySelector('.speaker-icon');
+
+      audio.preload = 'auto';
+
+      card.addEventListener('click', () => {
+          if (activeCard && activeCard !== card) {
+              const activeAudio = activeCard.querySelector('.card-audio');
+              activeAudio.pause();
+              activeAudio.currentTime = 0;
+              activeCard.classList.remove('active');
+          }
+
+          if (audio.paused) {
+              audio.currentTime = 0;
+              audio.play().catch(error => {
+                  console.error('Failed to play audio:', error);
+              });
+              card.classList.add('active');
+              activeCard = card;
+          } else {
+              audio.pause();
+              card.classList.remove('active');
+              activeCard = null;
+          }
+      });
+  });
+});

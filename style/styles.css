@@ -75,40 +75,27 @@ body:before {
     }
 }
 
-/* Centering and Resizing the Main Content */
 .content-container {
     text-align: center;
     display: flex;
     flex-direction: column;
-    /* Stack top-links and main-content vertically */
     justify-content: flex-start;
     align-items: center;
-    /* Center horizontally */
     padding-top: 20px;
-    /* Padding from the top */
     z-index: 1;
-    /* Ensure content is above the grid background */
     position: relative;
-    /* Necessary to maintain layering */
     padding-bottom: 20px;
-    /* Adds space at the bottom of the content */
 }
 
 .blog-container {
     display: flex;
     flex-direction: column;
-    /* Stack top-links and main-content vertically */
     justify-content: flex-start;
     align-items: center;
-    /* Center horizontally */
     padding-top: 20px;
-    /* Padding from the top */
     z-index: 1;
-    /* Ensure content is above the grid background */
     position: relative;
-    /* Necessary to maintain layering */
     padding-bottom: 20px;
-    /* Adds space at the bottom of the content */
 }
 
 a {
@@ -129,22 +116,14 @@ a:hover {
 /* Styling the top links box */
 .top-links {
     background-color: rgba(18, 53, 36, 0.9);
-    /* Same background color as the main content */
     width: 70%;
-    /* Matches the width of the main content */
     max-width: 1000px;
-    /* Align with main content max width */
     padding: 10px 20px;
-    /* Padding inside the box */
     margin-bottom: 20px;
-    /* Space between this box and the main content */
     border-radius: 15px;
-    /* Same rounded edges */
     box-shadow: 0px 0px 20px rgba(201, 224, 202, 0.5);
-    /* Same shadow effect */
     display: flex;
     justify-content: space-around;
-    /* Space out the links horizontally */
     align-items: center;
 }
 
@@ -245,19 +224,18 @@ a:hover {
     margin: 30px 0;
     text-align: center;
     z-index: 2;
-    /* Ensure it is in front of the grid */
 }
 
 .floating-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 50px 1px;
-    /* 10px for vertical gap, 20px for horizontal gap */
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     justify-items: center;
 }
+
 
 .card-container {
     position: relative;
@@ -276,6 +254,33 @@ a:hover {
     transition-property: transform, box-shadow;
     transition-timing-function: ease-out;
     transform: rotate3d(0);
+    position: relative;
+    cursor: pointer;
+}
+
+.card .speaker-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card .speaker-icon img {
+    width: 100%;
+    height: 100%;
+}
+
+.card:hover .speaker-icon {
+    opacity: 0.5;
+}
+
+.card.active .speaker-icon {
+    opacity: 0.8;
 }
 
 .card-phonelight {
@@ -302,10 +307,27 @@ a:hover {
     background-image: url('../img/whenonhigh.jpg');
 }
 
+@keyframes playSound {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 .card:hover {
     transition-duration: 150ms;
     box-shadow: 0px 0px 20px rgba(201, 224, 202, 0.5);
     transform: scale(1.05);
+}
+
+.card.active {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 30px rgba(201, 224, 202, 0.7);
 }
 
 .card .glow {

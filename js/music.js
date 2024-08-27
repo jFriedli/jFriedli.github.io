@@ -51,13 +51,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const cards = document.querySelectorAll('.card');
   let activeCard = null;
 
+  // Function to check if the device is mobile
+  function isMobile() {
+      return window.innerWidth <= 768; // 768px is a common breakpoint for mobile devices
+  }
+
   cards.forEach(card => {
       const audio = card.querySelector('.card-audio');
+
+      // If on mobile, don't allow audio to play
+      if (isMobile()) {
+          audio.pause();
+          card.classList.remove('active');
+      }
+
       const speakerIcon = card.querySelector('.speaker-icon');
 
       audio.preload = 'auto';
 
       card.addEventListener('click', () => {
+          if (isMobile()) {
+              return; // Prevent audio from playing on mobile devices
+          }
+
           if (activeCard && activeCard !== card) {
               const activeAudio = activeCard.querySelector('.card-audio');
               activeAudio.pause();

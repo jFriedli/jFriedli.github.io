@@ -1,71 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-27MC4S0SDQ"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jonas Benjamin Friedli</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, sans-serif; color: #fff; background: #0e0f1a; }
+    .grid-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-image: linear-gradient(#282a3a 1px, transparent 1px),
+                        linear-gradient(90deg, #282a3a 1px, transparent 1px);
+      background-size: 40px 40px; pointer-events: none; z-index: -1;
+    }
+    .grid-bg::after { content: ''; position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 50%; background: linear-gradient(to bottom, rgba(14,15,26,0) 0%, rgba(14,15,26,1) 100%);
+    }
+    .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      align-items: center; text-align: center; padding: 0 20px; position: relative;
+    }
+    .hero h1 { font-size: 4rem; background: linear-gradient(90deg, #4e8cff, #b76cff);
+      -webkit-background-clip: text; color: transparent;
+    }
+    .hero p { font-size: 1.25rem; color: #ccc; margin-top: .5rem; }
+    .socials { margin-top: 1.5rem; display: flex; gap: 1rem; }
+    .socials a img { width: 48px; height: 48px; 
+      background: rgba(255,255,255,0.1); padding: 8px; border-radius: 50%; transition: background 0.3s;
+    }
+    .socials a img:hover { background: rgba(255,255,255,0.2); }
+    .scroll-down { position: absolute; bottom: 20px; font-size: 1.5rem; color: #777;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(8px);} }
+    .content { padding: 80px 20px; max-width: 1000px; margin: auto; }
+    h2 { color: #fff; margin-bottom: 1rem; font-size: 2rem; text-align: center; }
+    table { width: 100%; border-collapse: collapse; background: #1c1d2a;
+      border-radius: 8px; overflow: hidden; margin-bottom: 40px;
+    }
+    th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #2a2b3a; }
+    th { background: #2a2b3a; cursor: pointer; }
+    tr:hover td { background: rgba(255,255,255,0.05); }
+    a.reference {
+      color: #8b5cf6;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    a.reference:hover { text-decoration: underline; }
 
-        gtag('config', 'G-27MC4S0SDQ');
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jFriedli</title>
-    <link rel="stylesheet" href="style/styles.css">
+  </style>
 </head>
-
 <body>
-    <div class="grid-wrap">
-        <div class="grid"></div>
+  <div class="grid-bg"></div>
+  <section class="hero">
+    <h1>Jonas Benjamin Friedli</h1>
+    <p>Security researcher specializing in vulnerability discovery and CTF challenges.</p>
+    <div class="socials">
+      <a href="https://www.linkedin.com/in/jonas-benjamin-friedli/" target="_blank"><img src="linkedin.webp" alt="LinkedIn"></a>
+      <a href="https://github.com/jFriedli" target="_blank"><img src="github.jpg" alt="GitHub"></a>
+      <a href="https://www.exploit-db.com/?author=12089" target="_blank"><img src="exploitdb.png" alt="ExploitDB"></a>
+      <a href="https://www.kaggle.com/jbfriedli" target="_blank"><img src="kaggle.png" alt="Kaggle"></a>
+      <a href="https://medium.com/@jonas.friedli" target="_blank"><img src="medium.jpeg" alt="Medium"></a>
+      <a href="https://li.sten.to/8beznzex" target="_blank"><img src="music.jpg" alt="Music"></a>
     </div>
-    <div class="content-container">
-        <div class="top-links">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="music.html">Music</a></li>
-                <li><a href="publications.html">Publications</a></li>
-            </ul>
-        </div>
-        <div class="subtitle">WHOAMI</div>
+    <div class="scroll-down">&#x2193;</div>
+  </section>
 
-        <!-- Terminal Window -->
-        <div class="terminal-window">
-            <header>
-                <div class="button green"></div>
-                <div class="button yellow"></div>
-                <div class="button red"></div>
-            </header>
-            <!-- Src; https://codepen.io/simoami/pen/eYrPdz -->
-            <section class="terminal">
-                <div class="history">
-                    <p>$ <span class="terminal-command">whoami</span></p>
-                    <p>JonasBenjaminFriedli</p>
-                    <br>
-                    <p>$ <span class="terminal-command">groups</span> JonasBenjaminFriedli</p>
-                    <p>JonasBenjaminFriedli : JonasBenjaminFriedli Programming CyberSecurity ComputerGraphics Data Music
-                        History Anthropology Art Literature Pequod</p>
-                    <br>
-                    <p>$ <span class="terminal-command">print</span> $socials</p>
-                    <p>LinkedIn:&nbsp;&nbsp;<a href="https://www.linkedin.com/in/jonas-benjamin-friedli/"
-                            target="_blank">https://www.linkedin.com/in/jonas-benjamin-friedli/</a></p>
-                    <p>GitHub:&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/jFriedli"
-                            target="_blank">https://github.com/jFriedli</a></p>
-                    <p>ExploitDB:&nbsp;<a href="https://www.exploit-db.com/?author=12089"
-                            target="_blank">https://www.exploit-db.com/?author=12089</a></p>
-                    <p>Kaggle:&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.kaggle.com/jbfriedli"
-                            target="_blank">https://www.kaggle.com/jbfriedli</a></p>
-                    <br>
-                    <p>$ <span class="blinking-cursor"></span></p>
-                </div>
-            </section>
-        </div>
-        <div class="site-rule">
-            <p>No suicides permitted here, and no smoking in the parlor.</p>
-        </div>
-    </div>
+  <div class="content">
+    <h2>CVEs</h2>
+    <table id="cve-table">
+      <thead>
+        <tr>
+          <th data-type="string">ID</th>
+          <th data-type="string">Software</th>
+          <th data-type="string">CWE</th>
+          <th data-type="number">Score</th>
+          <th data-type="string">Severity</th>
+          <th data-type="string">Reference</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Newest first -->
+        <tr>
+          <td>CVE-2025-8009</td>
+          <td>Security Ninja – Secure Firewall & Secure Malware Scanner</td>
+          <td>CWE-36 Absolute Path Traversal</td>
+          <td>4.9</td>
+          <td>Medium</td>
+          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2025-8009" target="_blank">CVE Record</a></td>
+        </tr>
+        <tr>
+          <td>CVE-2025-6851</td>
+          <td>Broken Link Notifier</td>
+          <td>CWE-918 Server-Side Request Forgery (SSRF)</td>
+          <td>7.2</td>
+          <td>High</td>
+          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2025-6851" target="_blank">CVE Record</a></td>
+        </tr>
+        <tr>
+          <td>CVE-2025-6838</td>
+          <td>Broken Link Notifier</td>
+          <td>CWE-1236 Improper Neutralization of Formula Elements in a CSV File</td>
+          <td>4.1</td>
+          <td>Medium</td>
+          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2025-6838" target="_blank">CVE Record</a></td>
+        </tr>
+        <tr>
+          <td>CVE-2025-6787</td>
+          <td>Smart Docs</td>
+          <td>CWE-79 Improper Neutralization of Input During Web Page Generation ('XSS')</td>
+          <td>6.4</td>
+          <td>Medium</td>
+          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2025-6787" target="_blank">CVE Record</a></td>
+        </tr>
+        <tr>
+          <td>CVE-2025-6786</td>
+          <td>DocCheck Login</td>
+          <td>CWE-284 Improper Access Control</td>
+          <td>5.3</td>
+          <td>Medium</td>
+          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2025-6786" target="_blank">CVE Record</a></td>
+        </tr>
+        <tr>
+          <td>CVE-2025-6783</td>
+          <td>GoZen Forms</td>
+          <td>CWE-89 Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')</td>
+          <td>7.5</td>
+          <td>High</td>
+          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2025-6783" target="_blank">CVE Record</a></td>
+        </tr>
+        <tr>
+          <td>CVE-2025-6782</td>
+          <td>GoZen Forms</td>
+          <td>CWE-89 Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')</td>
+          <td>7.5</td>
+          <td>High</td>
+          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2025-6782" target="_blank">CVE Record</a></td>
+        </tr>
+        <tr>
+          <td>CVE-2025-5490</td>
+          <td>Football Pool</td>
+          <td>CWE-79 Improper Neutralization of Input During Web Page Generation ('XSS')</td>
+          <td>5.5</td>
+          <td>Medium</td>
+          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2025-5490" target="_blank">CVE Record</a></td>
+        </tr>
+        <tr>
+          <td>CVE-2025-5322</td>
+          <td>VikRentCar Car Rental Management System</td>
+          <td>CWE-434 Unrestricted Upload of File with Dangerous Type</td>
+          <td>7.2</td>
+          <td>High</td>
+          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2025-5322" target="_blank">CVE Record</a></td>
+        </tr>
+        <tr>
+          <td>CVE-2025-5275</td>
+          <td>Charitable</td>
+          <td>CWE-79 Improper Neutralization of Input During Web Page Generation ('XSS')</td>
+          <td>4.4</td>
+          <td>Medium</td>
+          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2025-5275" target="_blank">CVE Record</a></td>
+        </tr>
+        <tr>
+          <td>CVE-2025-5142</td>
+          <td>Simple Page Access Restriction</td>
+          <td>CWE-352 Cross-Site Request Forgery (CSRF)</td>
+          <td>6.5</td>
+          <td>Medium</td>
+          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2025-5142" target="_blank">CVE Record</a></td>
+        </tr>
+        <tr>
+          <td>CVE-2024-9462</td>
+          <td>Poll Maker</td>
+          <td>CWE-79 Improper Neutralization of Input During Web Page Generation ('XSS')</td>
+          <td>3.1</td>
+          <td>Medium</td>
+          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2024-9462" target="_blank">CVE Record</a></td>
+        </tr>
+        <tr>
+          <td>CVE-2024-9461</td>
+          <td>Total Upkeep</td>
+          <td>CWE-78 Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')</td>
+          <td>7.2</td>
+          <td>High</td>
+          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2024-9461" target="_blank">CVE Record</a></td>
+        </tr>
+        <tr>
+          <td>CVE-2024-8488</td>
+          <td>Survey Maker</td>
+          <td>CWE-79 Improper Neutralization of Input During Web Page Generation ('XSS')</td>
+          <td>4.4</td>
+          <td>Medium</td>
+          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2024-8488" target="_blank">CVE Record</a></td>
+        </tr>
+        <tr>
+          <td>CVE-2024-7386</td>
+          <td>Premium Packages</td>
+          <td>CWE-352 Cross-Site Request Forgery (CSRF')</td>
+          <td>3.1</td>
+          <td>Medium</td>
+          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2024-7386" target="_blank">CVE Record</a></td>
+        </tr>
+        <tr>
+          <td>CVE-2024-6692</td>
+          <td>Easy Digital Downloads</td>
+          <td>CWE-79 Improper Neutralization of Input During Web Page Generation ('XSS')</td>
+          <td>3.3</td>
+          <td>Medium</td>
+          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2024-6692" target="_blank">CVE Record</a></td>
+        </tr>
+        <tr>
+          <td>CVE-2024-6691</td>
+          <td>Easy Digital Downloads</td>
+          <td>CWE-79 Improper Neutralization of Input During Web Page Generation ('XSS')</td>
+          <td>4.4</td>
+          <td>Medium</td>
+          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2024-6691" target="_blank">CVE Record</a></td>
+        </tr>
+        <tr>
+          <td>CVE-2023-3897</td>
+          <td>SureMDM On-premise</td>
+          <td>CWE-203 Observable Discrepancy</td>
+          <td>5.3</td>
+          <td>Medium</td>
+          <td>
+            <a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2023-3897" target="_blank">CVE Record</a>
+            <span> | </span>
+            <a class="reference" href="https://www.exploit-db.com/exploits/51804" target="_blank">ExploitDB</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>CTF Boxes built by me</h2>
+    <table id="ctf-table">
+      <thead>
+        <tr>
+          <th data-type="string">Name</th>
+          <th data-type="string">Company</th>
+          <th data-type="string">Reference</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>OpenVaulted</td>
+          <td>Offensive Security</td>
+          <td><a class="reference" href="https://portal.offsec.com/machine/openvaulted-207358/overview" target="_blank">Offsec Portal</a></td>
+        </tr>
+        <tr>
+          <td>RussianDolls</td>
+          <td>Offensive Security</td>
+          <td>
+            <a class="reference" href="https://portal.offsec.com/machine/russiandolls-187438/overview" target="_blank">Offsec Portal</a>
+            <span> | </span>
+            <a class="reference" href="https://routezero.security/2024/11/30/proving-grounds-practice-russiandolls-walkthrough/" target="_blank">Write-up</a>
+          </td>
+        </tr>
+        <tr>
+          <td>Chatroom</td>
+          <td>Offensive Security</td>
+          <td>
+            <a class="reference" href="https://portal.offsec.com/machine/chatroom-185974/overview" target="_blank">Offsec Portal</a>
+            <span> | </span>
+            <a class="reference" href="https://medium.com/@abyssal_bloom/offsec-pgpractice-chatroom-writeup-fb29c3de893a" target="_blank">Write-up</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function sortTable(table, col, type) {
+      const tbody = table.tBodies[0]; const rows = Array.from(tbody.rows);
+      const asc = !table.asc;
+      rows.sort((a,b) => {
+        const aText = a.cells[col].innerText.trim(); const bText = b.cells[col].innerText.trim();
+        return type==='number' ? (asc? aText-bText: bText-aText) : (asc? aText.localeCompare(bText): bText.localeCompare(aText));
+      });
+      rows.forEach(row => tbody.appendChild(row)); table.asc=asc;
+    }
+    document.querySelectorAll('table').forEach(table => table.querySelectorAll('th').forEach((th,i)=> th.addEventListener('click', ()=> sortTable(table,i,th.getAttribute('data-type')))));
+  </script>
 </body>
-
 </html>

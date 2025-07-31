@@ -27,7 +27,7 @@
       background: rgba(255,255,255,0.1); padding: 8px; border-radius: 50%; transition: background 0.3s;
     }
     .socials a img:hover { background: rgba(255,255,255,0.2); }
-    .scroll-down { position: absolute; bottom: 20px; font-size: 1.5rem; color: #777;
+    .scroll-down { position: absolute; bottom: 5%; font-size: 1.5rem; color: #777;
       animation: float 3s ease-in-out infinite;
     }
     @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(8px);} }
@@ -45,6 +45,23 @@
       font-weight: 500;
     }
     a.reference:hover { text-decoration: underline; }
+    /* for tablets and small desktops */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 3rem; }
+  .hero p  { font-size: 1rem; }
+  .socials a img { width: 40px; height: 40px; padding: 6px; }
+  .content { padding: 40px 10px; }
+  table { font-size: 0.875rem; }
+  th, td { padding: 8px 10px; }
+}
+
+/* for phones */
+@media (max-width: 480px) {
+  .hero h1 { font-size: 2rem; }
+  .hero p  { font-size: 0.875rem; }
+  .scroll-down { font-size: 1.25rem; }
+}
+
 
   </style>
 </head>

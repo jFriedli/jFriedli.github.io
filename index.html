@@ -95,11 +95,27 @@
       </thead>
       <tbody>
         <tr>
+          <td>CVE-2025-6832</td>
+          <td>All in One Time Clock Lite</td>
+          <td>CWE-79 Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')</td>
+          <td>4.4</td>
+          <td>Medium</td>
+          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2025-6832" target="_blank">CVE Record</a></td>
+        </tr>
+        <tr>
+          <td>CVE-2025-6626</td>
+          <td>ShortPixel Adaptive Images</td>
+          <td>CWE-79 Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')</td>
+          <td>4.4</td>
+          <td>Medium</td>
+          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2025-6626" target="_blank">CVE Record</a></td>
+        </tr>
+        <tr>
           <td>CVE-2025-8213</td>
           <td>NinjaScanner – Virus & Malware scan</td>
           <td>CWE-36 Absolute Path Traversal</td>
           <td>7.2</td>
-          <td>Medium</td>
+          <td>High</td>
           <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2025-8213" target="_blank">CVE Record</a></td>
         </tr>
         <tr>
@@ -204,7 +220,7 @@
           <td>CWE-78 Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')</td>
           <td>7.2</td>
           <td>High</td>
-          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2024-9461" target="_blank">CVE Record</a></td>
+          <td><a class="reference" href="https://www.cve.org/CVERecord?id=CVE-2024-9461" target="_blank">CVE Record</a> | <a class="reference" href="medium.com/@jonas.friedli/real-world-vulnerable-code-analysis-cve-2024-9461-remote-code-execution-953536cf4181" target="_blank">Write-up</a></td>
         </tr>
         <tr>
           <td>CVE-2024-8488</td>
@@ -301,6 +317,14 @@
       rows.forEach(row => tbody.appendChild(row)); table.asc=asc;
     }
     document.querySelectorAll('table').forEach(table => table.querySelectorAll('th').forEach((th,i)=> th.addEventListener('click', ()=> sortTable(table,i,th.getAttribute('data-type')))));
+    document.addEventListener('DOMContentLoaded', () => {
+      const cveTable = document.getElementById('cve-table');
+      if (cveTable) {
+        cveTable.asc = true; // Start with descending order (newest CVEs first)
+        sortTable(cveTable, 0, 'string');
+      }
+    });
+  
   </script>
 </body>
 </html>

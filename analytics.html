@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CVE Analytics • Jonas Benjamin Friedli</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+  <style>
+    :root {
+      --card-bg: #171822;
+      --border: #2a2b3a;
+      --muted: #9aa0aa;
+      --track: #222335;
+      --sev-low: #22c55e;
+      --sev-medium: #eab308;
+      --sev-high: #f97316;
+      --sev-critical: #ef4444;
+    }
+    body { background: #0e0f1a; }
+    header.container { padding: 2rem 0 1rem; }
+    .charts { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.25rem; }
+    .card { grid-column: span 6; background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 1rem; box-shadow: 0 8px 24px rgba(0,0,0,.35); }
+    .card.wide { grid-column: span 12; }
+    .card h3 { margin: .25rem 0 1rem; }
+    .meta { color: #a7a7b3; font-size: .95rem; }
+    canvas { width: 100% !important; height: 380px !important; }
+    .chart-square canvas { height: auto !important; }
+    @media (max-width: 1100px) { .card { grid-column: span 12; } }
+    .toolbar { display:flex; gap:1rem; flex-wrap:wrap; align-items:center; justify-content:space-between; margin: .5rem 0 1rem; }
+    .toolbar .left { display:flex; gap:.75rem; align-items:center; flex-wrap:wrap; }
+    .pill { border:1px solid var(--border); border-radius:999px; padding:.35rem .6rem; color:#cfcfe2; font-size:.9rem; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    .error { display:none; background:#2a1a1a; border:1px solid #552121; color:#ffb3b3; padding:.75rem 1rem; border-radius:.5rem; margin: .75rem 0 0; }
+    .footer-note { color:#86869a; font-size:.85rem; text-align:center; margin-top:1rem; }
+    .ranked-list { display: grid; gap: .75rem; }
+    .rank-row { display: grid; grid-template-columns: 1fr auto; gap: .75rem; align-items: center; }
+    .rank-left { min-width: 0; }
+    .rank-title { color: #e5e7ef; font-size: .95rem; line-height: 1.3; word-break: break-word; }
+    .rank-bar { position: relative; width: 100%; height: 10px; border-radius: 999px; background: var(--track); overflow: hidden; margin-top: .35rem; border: 1px solid var(--border); }
+    .rank-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0%; border-radius: 999px; transition: width .6s ease; }
+    .rank-count { color: var(--muted); font-weight: 600; min-width: 2.25rem; text-align: right; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <main class="container">
+    <header class="container">
+      <h1>CVE Analytics</h1>
+      <p class="meta">Technical overview of discovered CVEs. Data source: <span class="mono">/cves.csv</span></p>
+      <div class="toolbar">
+        <div class="left">
+          <span id="datasetMeta" class="pill">Loading…</span>
+          <a href="index.html" role="button" class="contrast">Home</a>
+        </div>
+      </div>
+      <div id="loadError" class="error" role="alert"></div>
+      <hr />
+    </header>
+
+    <section class="charts">
+      <article class="card chart-square">
+        <h3>Severity distribution</h3>
+        <canvas id="severityChart"></canvas>
+      </article>
+
+      <article class="card">
+        <h3>Top CWEs (full names)</h3>
+        <div id="cweList" class="ranked-list" aria-live="polite"></div>
+      </article>
+
+      <article class="card wide">
+        <h3>CVEs per year</h3>
+        <canvas id="perYearChart"></canvas>
+      </article>
+
+      <article class="card">
+        <h3>Scores over time (average per year)</h3>
+        <canvas id="avgScoreChart"></canvas>
+      </article>
+
+      <article class="card">
+        <h3>Severity by year</h3>
+        <canvas id="severityByYearChart"></canvas>
+      </article>
+    </section>
+
+    <p class="footer-note">I promise nothing complete; because any human thing supposed to be complete, must for that very reason infallibly be faulty.</p>
+  </main>
+
+  <script>
+    function showError(msg){const el=document.getElementById('loadError');el.textContent=msg;el.style.display='block'}
+    function parseCSV(text){const rows=[];let row=[],field='',inQuotes=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(inQuotes){if(c==='"'&&n==='"'){field+='"';i++}else if(c==='"'){inQuotes=false}else{field+=c}}else{if(c==='"'){inQuotes=true}else if(c===','){row.push(field);field=''}else if(c===`\n`){row.push(field);rows.push(row);row=[];field=''}else if(c!=='\r'){field+=c}}}if(field||row.length){row.push(field);rows.push(row)}return rows}
+    function yearFromCVE(id){const m=/CVE-(\d{4})-/i.exec(id||'');return m?Number(m[1]):null}
+    function topEntries(map,n=10){return Object.entries(map).sort((a,b)=>b[1]-a[1]).slice(0,n)}
+    function aggregateBy(list,keyFn){const m={};for(const item of list){const k=keyFn(item);if(!k)continue;m[k]=(m[k]||0)+1}return m}
+    function csvToObjects(text){const rows=parseCSV(text);if(!rows.length)return[];const header=rows[0].map(h=>h.trim());const norm=header.map(h=>h.replace(/\s+/g,'_').toUpperCase());const out=[];for(let i=1;i<rows.length;i++){const r=rows[i];if(!r||r.every(x=>!x||!x.trim()))continue;const o={};for(let j=0;j<norm.length;j++)o[norm[j]]=(r[j]??'').trim();out.push(o)}return out}
+    async function loadCSV(url){const resp=await fetch(url,{cache:'no-store'});if(!resp.ok)throw new Error(`Failed to fetch ${url} (${resp.status})`);const text=await resp.text();return csvToObjects(text).map(o=>({id:o.ID||'',software:o.SOFTWARE||'',cwe:o.CWE||'',score:o.SCORE||'',severity:o.SEVERITY||'',year:yearFromCVE(o.ID)}))}
+    function makeChart(ctx,cfg){return new Chart(ctx,cfg)}
+    function paletteForSeverities(labels){const s=getComputedStyle(document.documentElement);const map={Low:s.getPropertyValue('--sev-low').trim()||'#22c55e',Medium:s.getPropertyValue('--sev-medium').trim()||'#eab308',High:s.getPropertyValue('--sev-high').trim()||'#f97316',Critical:s.getPropertyValue('--sev-critical').trim()||'#ef4444',Unknown:'#9ca3af'};return labels.map(l=>map[l]||'#9ca3af')}
+    function colors(n){const arr=[];for(let i=0;i<n;i++)arr.push(`hsl(${Math.round((360/n)*i)}, 70%, 55%)`);return arr}
+    function safeAvg(nums){const a=nums.filter(x=>Number.isFinite(x));if(!a.length)return 0;return a.reduce((p,q)=>p+q,0)/a.length}
+    function renderCWEList(container,data){container.innerHTML='';const cweMap=aggregateBy(data,d=>d.cwe||'Unknown');const top=topEntries(cweMap,10);if(!top.length){const p=document.createElement('p');p.textContent='No CWE data available.';p.style.color='#bfc3d0';container.appendChild(p);return}const max=Math.max(...top.map(([,v])=>v));const palette=colors(top.length);top.forEach(([name,count],i)=>{const row=document.createElement('div');row.className='rank-row';const left=document.createElement('div');left.className='rank-left';const title=document.createElement('div');title.className='rank-title';title.textContent=name;const bar=document.createElement('div');bar.className='rank-bar';const fill=document.createElement('div');fill.className='rank-fill';fill.style.background=palette[i];fill.style.width=`${(count/max)*100}%`;bar.appendChild(fill);left.appendChild(title);left.appendChild(bar);const right=document.createElement('div');right.className='rank-count';right.textContent=count;row.appendChild(left);row.appendChild(right);container.appendChild(row)})}
+    (async function init(){
+      try{
+        const data=await loadCSV('cves.csv');
+        if(!data.length){showError('No data found in cves.csv');return}
+        document.getElementById('datasetMeta').textContent=`${data.length} CVEs`;
+        const countsByYear=aggregateBy(data,d=>d.year);
+        const yearsSorted=Object.keys(countsByYear).map(Number).sort((a,b)=>a-b);
+        const ctxSeverity=document.getElementById('severityChart');
+        const ctxPerYear=document.getElementById('perYearChart');
+        const ctxAvgScore=document.getElementById('avgScoreChart');
+        const ctxSevYear=document.getElementById('severityByYearChart');
+        const cweListEl=document.getElementById('cweList');
+
+        const sevMap=aggregateBy(data,d=>{const s=(d.severity||'Unknown').toLowerCase();return s.charAt(0).toUpperCase()+s.slice(1)});
+        const order=['Low','Medium','High','Critical','Unknown'];
+        const sevLabels=order.filter(l=>l in sevMap);
+        const sevData=sevLabels.map(k=>sevMap[k]);
+        makeChart(ctxSeverity,{type:'doughnut',data:{labels:sevLabels,datasets:[{data:sevData,backgroundColor:paletteForSeverities(sevLabels),borderColor:'#0e0f1a'}]},options:{plugins:{legend:{position:'bottom'}},maintainAspectRatio:true,aspectRatio:1}});
+
+        renderCWEList(cweListEl,data);
+
+        makeChart(ctxPerYear,{type:'line',data:{labels:yearsSorted,datasets:[{label:'CVEs',data:yearsSorted.map(y=>countsByYear[y]||0),tension:.25}]},options:{scales:{y:{beginAtZero:true}},plugins:{legend:{display:false}}}});
+
+        const avgByYear={};for(const y of yearsSorted){const scores=data.filter(d=>d.year===y).map(d=>parseFloat(d.score)).filter(Number.isFinite);avgByYear[y]=safeAvg(scores)}
+        makeChart(ctxAvgScore,{type:'line',data:{labels:yearsSorted,datasets:[{label:'Average CVSS',data:yearsSorted.map(y=>avgByYear[y]||0),tension:.25}]},options:{scales:{y:{min:0,max:10}}}});
+
+        const severities=order.filter(s=>data.some(d=>(d.severity||'').toLowerCase()===s.toLowerCase()));
+        const countsSevYear={};for(const y of yearsSorted){countsSevYear[y]={};for(const s of severities)countsSevYear[y][s]=0}
+        for(const d of data){const y=d.year;const s=(d.severity||'Unknown').toLowerCase();const key=s.charAt(0).toUpperCase()+s.slice(1);if(y&&countsSevYear[y]&&key in countsSevYear[y])countsSevYear[y][key]+=1}
+        const sevColors=paletteForSeverities(severities);
+        makeChart(ctxSevYear,{type:'bar',data:{labels:yearsSorted,datasets:severities.map((s,i)=>({label:s,data:yearsSorted.map(y=>countsSevYear[y][s]||0),backgroundColor:sevColors[i]}))},options:{responsive:true,scales:{x:{stacked:true},y:{stacked:true,beginAtZero:true}}}});
+      }catch(err){console.error(err);showError(err.message||String(err))}
+    })();
+  </script>
+</body>
+</html>

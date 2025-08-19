@@ -7,6 +7,7 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Segoe UI', Tahoma, sans-serif; color: #fff; background: #0e0f1a; }
+
     .grid-bg { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;
       background-image: linear-gradient(#282a3a 1px, transparent 1px),
                         linear-gradient(90deg, #282a3a 1px, transparent 1px);
@@ -15,6 +16,7 @@
     .grid-bg::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%;
       background: linear-gradient(to bottom, rgba(14,15,26,0) 0%, rgba(14,15,26,1) 100%);
     }
+
     .hero { min-height: 100svh; display: flex; flex-direction: column; justify-content: center;
       align-items: center; text-align: center; padding: 0 20px; position: relative; }
     .hero h1 { font-size: clamp(2rem, 5vw, 4rem); background: linear-gradient(90deg, #4e8cff, #b76cff);
@@ -26,15 +28,44 @@
     .socials a img:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
     .scroll-down { position: absolute; bottom: 5%; font-size: 1.25rem; color: #777; animation: float 3s ease-in-out infinite; }
     @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(8px);} }
+
     .content { padding: 80px 20px; max-width: 1100px; margin: auto; }
 
     .table-card { background: #1c1d2a; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.35);
       border: 1px solid #2a2b3a; }
     .table-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px;
       border-bottom: 1px solid #2a2b3a; background: linear-gradient(0deg, #1c1d2a, #222335);
-      border-top-left-radius: 12px; border-top-right-radius: 12px; }
+      border-top-left-radius: 12px; border-top-right-radius: 12px; gap: 12px; }
     .table-title { font-weight: 600; letter-spacing: .3px; }
     .table-meta { color: #aaa; font-size: .95rem; }
+    .table-actions { display: flex; gap: 10px; align-items: center; margin-left: auto; }
+
+    .btn { display:inline-block; padding:.5rem .9rem; border-radius:10px; border:1px solid #2a2b3a;
+      background: linear-gradient(0deg, #1c1d2a, #222335); color:#eaeaff; text-decoration:none; font-weight:600;
+      box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+    .btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+    /* Accent link color matches .reference (#8b5cf6) */
+    .analytics-btn {
+      display:inline-flex; align-items:center; justify-content:center;
+      padding: .45rem .85rem;
+      border-radius: 8px;
+      border: 1px solid #8b5cf6;
+      color: #8b5cf6;
+      background: transparent;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: .2px;
+      transition: all .2s ease;
+      box-shadow: 0 6px 18px rgba(139,92,246,.25);
+    }
+    .analytics-btn:hover {
+      background: #8b5cf6;
+      color: #0e0f1a;
+      box-shadow: 0 8px 22px rgba(139,92,246,.45);
+      transform: translateY(-1px);
+    }
+
     .table-wrap { max-height: 60vh; overflow: auto; scrollbar-width: thin; scrollbar-color: #444 transparent;
       border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; }
     .table-wrap::-webkit-scrollbar { height: 10px; width: 10px; }
@@ -46,6 +77,11 @@
     tr:hover td { background: rgba(255,255,255,0.05); }
     a.reference { color: #8b5cf6; text-decoration: none; font-weight: 500; }
     a.reference:hover { text-decoration: underline; }
+
+    th.sortable { user-select: none; }
+    th.sortable::after { content: "⇅"; font-size: .85rem; color: #9aa0aa; margin-left: .45rem; }
+    th.sortable[data-sort="asc"]::after { content: "▲"; color: #e5e7ef; }
+    th.sortable[data-sort="desc"]::after { content: "▼"; color: #e5e7ef; }
 
     @media (max-width: 768px) {
       .socials a img { width: 40px; height: 40px; padding: 6px; }
@@ -83,17 +119,21 @@
       <div class="table-header">
         <div class="table-title">CVEs</div>
         <div class="table-meta" id="cve-count"></div>
+        <div class="table-actions">
+          <!-- removed class="btn" so analytics-btn wins -->
+          <a class="analytics-btn" href="analytics.html">Analytics</a>
+        </div>
       </div>
       <div class="table-wrap">
         <div class="table-inner">
           <table id="cve-table">
             <thead>
               <tr>
-                <th data-type="string">ID</th>
-                <th data-type="string">Software</th>
-                <th data-type="string">CWE</th>
-                <th data-type="number">Score</th>
-                <th data-type="string">Severity</th>
+                <th class="sortable" data-type="string">ID</th>
+                <th class="sortable" data-type="string">Software</th>
+                <th class="sortable" data-type="string">CWE</th>
+                <th class="sortable" data-type="number">Score</th>
+                <th class="sortable" data-type="string">Severity</th>
                 <th data-type="string">Reference</th>
               </tr>
             </thead>
@@ -110,8 +150,8 @@
           <table id="ctf-table">
             <thead>
               <tr>
-                <th data-type="string">Name</th>
-                <th data-type="string">Company</th>
+                <th class="sortable" data-type="string">Name</th>
+                <th class="sortable" data-type="string">Company</th>
                 <th data-type="string">Reference</th>
               </tr>
             </thead>
@@ -123,82 +163,39 @@
   </div>
 
   <script>
-    function parseCSV(text) {
-      const rows = [];
-      let row = [], field = '', inQuotes = false;
-      for (let i = 0; i < text.length; i++) {
-        const c = text[i], next = text[i+1];
-        if (inQuotes) {
-          if (c === '"' && next === '"') { field += '"'; i++; }
-          else if (c === '"') { inQuotes = false; }
-          else field += c;
-        } else {
-          if (c === '"') inQuotes = true;
-          else if (c === ',') { row.push(field); field=''; }
-          else if (c === '\n') { row.push(field); rows.push(row); row=[]; field=''; }
-          else if (c !== '\r') field += c;
-        }
-      }
-      if (field || row.length) { row.push(field); rows.push(row); }
-      return rows;
-    }
-
-    function renderTableFromCSV(tableId, csvUrl, mapRowToCells) {
-      return fetch(csvUrl)
-        .then(r => r.text())
-        .then(t => {
-          const rows = parseCSV(t).slice(1);
-          const tbody = document.querySelector(`#${tableId} tbody`);
-          tbody.innerHTML = '';
-          rows.forEach(r => {
-            if (!r.length || r.every(x => !x.trim())) return;
-            const tr = document.createElement('tr');
-            mapRowToCells(r).forEach(cell => {
-              const td = document.createElement('td');
-              if (cell && cell.__html__) td.innerHTML = cell.__html__;
-              else td.textContent = cell ?? '';
-              tr.appendChild(td);
-            });
-            tbody.appendChild(tr);
-          });
-        });
-    }
-
-    function sortTable(table, col, type) {
-      const tbody = table.tBodies[0], rows = Array.from(tbody.rows);
-      const asc = !table.asc;
-      rows.sort((a,b) => {
-        const A=a.cells[col].innerText.trim(), B=b.cells[col].innerText.trim();
-        if(type==='number'){return asc?(+A-(+B)):(+B-(+A));}
-        return asc?A.localeCompare(B):B.localeCompare(A);
-      });
-      rows.forEach(r=>tbody.appendChild(r)); table.asc=asc;
-    }
-
-    function updateCveCount() {
-      document.getElementById('cve-count').textContent =
-        "Total CVEs: " + document.getElementById('cve-table').tBodies[0].rows.length;
-    }
-
-    document.addEventListener('DOMContentLoaded', async () => {
-      await renderTableFromCSV('cve-table','cves.csv',r=>{
-        const [id,soft,cwe,score,severity,url,writeup]=r;
-        const refs=[`<a class="reference" href="${url}" target="_blank">CVE Record</a>`];
-        if(writeup) refs.push(`<span> | </span><a class="reference" href="${writeup}" target="_blank">Write-up</a>`);
+    function parseCSV(text){const rows=[];let row=[],field='',inQuotes=false;for(let i=0;i<text.length;i++){const c=text[i],next=text[i+1];if(inQuotes){if(c==='"'&&next==='"'){field+='"';i++}else if(c==='"'){inQuotes=false}else field+=c}else{if(c==='"')inQuotes=true;else if(c===','){row.push(field);field=''}else if(c===`\n`){row.push(field);rows.push(row);row=[];field=''}else if(c!=='\r')field+=c}}if(field||row.length){row.push(field);rows.push(row)}return rows}
+    function csvToObjects(text){const rows=parseCSV(text);if(!rows.length)return[];const header=rows[0].map(h=>h.trim());const norm=header.map(h=>h.replace(/\s+/g,'_').toUpperCase());const out=[];for(let i=1;i<rows.length;i++){const r=rows[i];if(!r||r.every(x=>!x||!x.trim()))continue;const obj={};for(let j=0;j<norm.length;j++)obj[norm[j]]=(r[j]??'').trim();out.push(obj)}return out}
+    async function renderFromCSV(tableId,csvUrl,mapObjToCells){const text=await fetch(csvUrl).then(r=>r.text());const data=csvToObjects(text);const tbody=document.querySelector(`#${tableId} tbody`);tbody.innerHTML='';data.forEach(obj=>{const tr=document.createElement('tr');mapObjToCells(obj).forEach(cell=>{const td=document.createElement('td');if(cell&&cell.__html__)td.innerHTML=cell.__html__;else td.textContent=cell??'';tr.appendChild(td)});tbody.appendChild(tr)})}
+    function setSortIndicator(th,dir){th.parentElement.querySelectorAll('th.sortable').forEach(h=>h.removeAttribute('data-sort'));if(dir)th.setAttribute('data-sort',dir)}
+    function sortTable(table,col,type,th){const tbody=table.tBodies[0],rows=Array.from(tbody.rows);const asc=!table.asc;rows.sort((a,b)=>{const A=a.cells[col].innerText.trim(),B=b.cells[col].innerText.trim();if(type==='number'){return asc?(+A-(+B)):(+B-(+A))}return asc?A.localeCompare(B):B.localeCompare(A)});rows.forEach(r=>tbody.appendChild(r));table.asc=asc;if(th)setSortIndicator(th,asc?'asc':'desc')}
+    function updateCveCount(){const n=document.getElementById('cve-table').tBodies[0].rows.length;document.getElementById('cve-count').textContent="Total CVEs: "+n}
+    document.addEventListener('DOMContentLoaded', async ()=> {
+      await renderFromCSV('cve-table','cves.csv',obj=>{
+        const id=obj.ID||'', soft=obj.SOFTWARE||'', cwe=obj.CWE||'', score=obj.SCORE||'', severity=obj.SEVERITY||'';
+        const cveUrl=obj.CVE_URL||obj.CVE||'', writeUrl=obj.WRITEUP_URL||obj.WRITEUPURL||obj.WRITEUP||'';
+        const explUrl=obj.EXPLOIT_URL||obj.EXPLOITURL||obj.EXPLOIT||obj.EXPLOITDB||'';
+        const refs=[]; if(cveUrl)refs.push(`<a class="reference" href="${cveUrl}" target="_blank">CVE Record</a>`);
+        if(writeUrl)refs.push(`<span> | </span><a class="reference" href="${writeUrl}" target="_blank">Write-up</a>`);
+        if(explUrl)refs.push(`<span> | </span><a class="reference" href="${explUrl}" target="_blank">Exploit</a>`);
         return [id,soft,cwe,score,severity,{__html__:refs.join(' ')}];
       });
       updateCveCount();
-      const cveTable=document.getElementById('cve-table'); cveTable.asc=true; sortTable(cveTable,0,'string');
+      const cveTable=document.getElementById('cve-table'); cveTable.asc=true;
+      sortTable(cveTable,0,'string', cveTable.tHead.rows[0].cells[0]);
 
-      await renderTableFromCSV('ctf-table','ctfs.csv',r=>{
-        const [name,company,ref1,ref2label,ref2url]=r;
+      await renderFromCSV('ctf-table','ctfs.csv',obj=>{
+        const name=obj.NAME||'', company=obj.COMPANY||'';
+        const ref1=obj.REF1||obj.OFFSEC||'';
+        const ref2label=obj.REF2LABEL||obj.LABEL||'', ref2url=obj.REF2URL||'';
         const refs=[`<a class="reference" href="${ref1}" target="_blank">Offsec Portal</a>`];
         if(ref2label&&ref2url) refs.push(`<span> | </span><a class="reference" href="${ref2url}" target="_blank">${ref2label}</a>`);
         return [name,company,{__html__:refs.join(' ')}];
       });
 
       document.querySelectorAll('table').forEach(t=>{
-        t.querySelectorAll('th').forEach((th,i)=>th.addEventListener('click',()=>sortTable(t,i,th.getAttribute('data-type'))));
+        t.querySelectorAll('th.sortable').forEach((th,i)=>
+          th.addEventListener('click',()=>sortTable(t,i,th.getAttribute('data-type'),th))
+        );
       });
     });
   </script>

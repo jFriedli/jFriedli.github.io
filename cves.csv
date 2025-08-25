@@ -1,4 +1,5 @@
 ID,Software,CWE,Score,Severity,CVE_URL,WRITEUP_URL,EXPLOIT_URL
+CVE-2025-9172,Vibes,"CWE-89 Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",7.5,Medium,https://www.cve.org/CVERecord?id=CVE-2025-9172,,
 CVE-2025-8678,WP Crontrol,"CWE-918 Server-Side Request Forgery (SSRF)",6.5,Medium,https://www.cve.org/CVERecord?id=CVE-2025-8678,,
 CVE-2025-8783,Contact Manager,"CWE-79 Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",4.4,Medium,https://www.cve.org/CVERecord?id=CVE-2025-8783,,
 CVE-2025-8013,Quttera Web Malware Scanner,CWE-918 Server-Side Request Forgery (SSRF),3.8,Low,https://www.cve.org/CVERecord?id=CVE-2025-8013,,

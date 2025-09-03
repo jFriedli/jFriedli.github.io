@@ -1,4 +1,8 @@
 ID,Software,CWE,Score,Severity,CVE_URL,WRITEUP_URL,EXPLOIT_URL
+CVE-2025-9519,Easy Timer,"CWE-78 Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",7.2,High,https://www.cve.org/CVERecord?id=CVE-2025-9519,,
+CVE-2025-9516,atec Debug,CWE-36 Absolute Path Traversal,4.9,Medium,https://www.cve.org/CVERecord?id=CVE-2025-9516,,
+CVE-2025-9517,atec Debug,"CWE-78 Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",7.2,High,https://www.cve.org/CVERecord?id=CVE-2025-9517,,
+CVE-2025-9518,atec Debug,"CWE-78 Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",7.2,High,https://www.cve.org/CVERecord?id=CVE-2025-9518,,
 CVE-2025-9172,Vibes,"CWE-89 Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",7.5,High,https://www.cve.org/CVERecord?id=CVE-2025-9172,,
 CVE-2025-8678,WP Crontrol,"CWE-918 Server-Side Request Forgery (SSRF)",6.5,Medium,https://www.cve.org/CVERecord?id=CVE-2025-8678,,
 CVE-2025-8783,Contact Manager,"CWE-79 Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",4.4,Medium,https://www.cve.org/CVERecord?id=CVE-2025-8783,,

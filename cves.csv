@@ -1,4 +1,5 @@
 ID,Software,CWE,Score,Severity,CVE_URL,WRITEUP_URL,EXPLOIT_URL
+CVE-2025-9853,Optio Dentistry,"CWE-79 Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",6.4,Medium,https://www.cve.org/CVERecord?id=CVE-2025-9853,,
 CVE-2025-9519,Easy Timer,"CWE-78 Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",7.2,High,https://www.cve.org/CVERecord?id=CVE-2025-9519,,
 CVE-2025-9516,atec Debug,CWE-36 Absolute Path Traversal,4.9,Medium,https://www.cve.org/CVERecord?id=CVE-2025-9516,,
 CVE-2025-9517,atec Debug,"CWE-78 Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",7.2,High,https://www.cve.org/CVERecord?id=CVE-2025-9517,,
@@ -15,8 +16,8 @@ CVE-2025-6832,All in One Time Clock Lite,"CWE-79 Improper Neutralization of Inpu
 CVE-2025-6626,ShortPixel Adaptive Images,"CWE-79 Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",4.4,Medium,https://www.cve.org/CVERecord?id=CVE-2025-6626,,
 CVE-2025-8213,NinjaScanner – Virus & Malware scan,CWE-36 Absolute Path Traversal,7.2,High,https://www.cve.org/CVERecord?id=CVE-2025-8213,,
 CVE-2025-8009,Security Ninja – Secure Firewall & Secure Malware Scanner,CWE-36 Absolute Path Traversal,4.9,Medium,https://www.cve.org/CVERecord?id=CVE-2025-8009,,
-CVE-2025-6851,Broken Link Notifier,CWE-918 Server-Side Request Forgery (SSRF),7.2,High,https://www.cve.org/CVERecord?id=CVE-2025-6851,.
-CVE-2025-6838,Broken Link Notifier,CWE-1236 Improper Neutralization of Formula Elements in a CSV File,4.1,Medium,https://www.cve.org/CVERecord?id=CVE-2025-6838,.
+CVE-2025-6851,Broken Link Notifier,CWE-918 Server-Side Request Forgery (SSRF),7.2,High,https://www.cve.org/CVERecord?id=CVE-2025-6851,,
+CVE-2025-6838,Broken Link Notifier,CWE-1236 Improper Neutralization of Formula Elements in a CSV File,4.1,Medium,https://www.cve.org/CVERecord?id=CVE-2025-6838,,
 CVE-2025-6787,Smart Docs,"CWE-79 Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",6.4,Medium,https://www.cve.org/CVERecord?id=CVE-2025-6787,,
 CVE-2025-6786,DocCheck Login,CWE-284 Improper Access Control,5.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-6786,,
 CVE-2025-6783,GoZen Forms,"CWE-89 Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",7.5,High,https://www.cve.org/CVERecord?id=CVE-2025-6783,,

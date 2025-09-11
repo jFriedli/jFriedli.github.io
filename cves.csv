@@ -1,5 +1,5 @@
 ID,Software,CWE,Score,Severity,CVE_URL,WRITEUP_URL,EXPLOIT_URL
-CVE-2025-8692,Coupon API,"CWE-78 Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",Medium,https://www.cve.org/CVERecord?id=CVE-2025-8692,,
+CVE-2025-8692,Coupon API,"CWE-78 Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",4.9,Medium,https://www.cve.org/CVERecord?id=CVE-2025-8692,,
 CVE-2025-10049,Responsive Filterable Portfolio,CWE-434 Unrestricted Upload of File with Dangerous Type,7.2,High,https://www.cve.org/CVERecord?id=CVE-2025-10049,,
 CVE-2025-9853,Optio Dentistry,"CWE-79 Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",6.4,Medium,https://www.cve.org/CVERecord?id=CVE-2025-9853,,
 CVE-2025-9519,Easy Timer,"CWE-78 Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')",7.2,High,https://www.cve.org/CVERecord?id=CVE-2025-9519,,

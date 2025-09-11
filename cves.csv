@@ -1,4 +1,5 @@
 ID,Software,CWE,Score,Severity,CVE_URL,WRITEUP_URL,EXPLOIT_URL
+CVE-2025-9879,Spotify Embed Creator,"CWE-79 Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",6.4,Medium,https://www.cve.org/CVERecord?id=CVE-2025-9879,,
 CVE-2025-9018,Time Tracker,CWE-862 Missing Authorization,8.8,High,https://www.cve.org/CVERecord?id=CVE-2025-9018,,
 CVE-2025-8692,Coupon API,"CWE-89 Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')",4.9,Medium,https://www.cve.org/CVERecord?id=CVE-2025-8692,,
 CVE-2025-10049,Responsive Filterable Portfolio,CWE-434 Unrestricted Upload of File with Dangerous Type,7.2,High,https://www.cve.org/CVERecord?id=CVE-2025-10049,,

@@ -1,6 +1,6 @@
 ID,Software,CWE,Score,Severity,CVE_URL,WRITEUP_URL,EXPLOIT_URL
-CVE-2025-10188,CWE-352 Cross-Site Request Forgery (CSRF),5.4,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10188,,
-CVE-2025-10050,CWE-22 Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal'),6.6,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10050,,
+CVE-2025-10188,The Hack Repair Guy's Plugin Archiver,CWE-352 Cross-Site Request Forgery (CSRF),5.4,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10188,,
+CVE-2025-10050,Developer Loggers for Simple History,CWE-22 Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal'),6.6,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10050,,
 CVE-2025-9891,User Sync – Remote User Sync,CWE-352 Cross-Site Request Forgery (CSRF),4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-9891,,
 CVE-2025-10176,The Hack Repair Guy's Plugin Archiver,CWE-22 Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal'),7.2,High,https://www.cve.org/CVERecord?id=CVE-2025-10176,,
 CVE-2025-9879,Spotify Embed Creator,"CWE-79 Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",6.4,Medium,https://www.cve.org/CVERecord?id=CVE-2025-9879,,

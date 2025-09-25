@@ -1,4 +1,5 @@
 ID,Software,CWE,Score,Severity,CVE_URL,WRITEUP_URL,EXPLOIT_URL
+CVE-2025-10752,OAuth Single Sign On – SSO (OAuth Client),CWE-352 Cross-Site Request Forgery (CSRF),4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10752,,
 CVE-2025-10658,SupportCandy,CWE-307 Improper Restriction of Excessive Authentication Attempts,6.5,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10658,,
 CVE-2025-10305,Secure Passkeys,CWE-862 Missing Authorization,5.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10305,,
 CVE-2025-8575,LWS Cleaner,CWE-36 Absolute Path Traversal,7.2,High,https://www.cve.org/CVERecord?id=CVE-2025-8575,,

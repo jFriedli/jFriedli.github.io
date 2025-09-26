@@ -1,4 +1,6 @@
 ID,Software,CWE,Score,Severity,CVE_URL,WRITEUP_URL,EXPLOIT_URL
+CVE-2025-10745,Banhammer,CWE-330 Use of Insufficiently Random Values,5.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10745,,
+CVE-2025-10173,ShopEngine Elementor WooCommerce Builder Addon,CWE-862 Missing Authorization,2.7,Low,https://www.cve.org/CVERecord?id=CVE-2025-10173,,
 CVE-2025-10752,OAuth Single Sign On – SSO (OAuth Client),CWE-352 Cross-Site Request Forgery (CSRF),4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10752,,
 CVE-2025-10658,SupportCandy,CWE-307 Improper Restriction of Excessive Authentication Attempts,6.5,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10658,,
 CVE-2025-10305,Secure Passkeys,CWE-862 Missing Authorization,5.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10305,,

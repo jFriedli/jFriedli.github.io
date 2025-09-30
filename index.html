@@ -120,7 +120,6 @@
         <div class="table-title">CVEs</div>
         <div class="table-meta" id="cve-count"></div>
         <div class="table-actions">
-          <!-- removed class="btn" so analytics-btn wins -->
           <a class="analytics-btn" href="analytics.html">Analytics</a>
         </div>
       </div>
@@ -129,7 +128,7 @@
           <table id="cve-table">
             <thead>
               <tr>
-                <th class="sortable" data-type="string">ID</th>
+                <th class="sortable" data-type="cve">ID</th>
                 <th class="sortable" data-type="string">Software</th>
                 <th class="sortable" data-type="string">CWE</th>
                 <th class="sortable" data-type="number">Score</th>
@@ -163,12 +162,103 @@
   </div>
 
   <script>
-    function parseCSV(text){const rows=[];let row=[],field='',inQuotes=false;for(let i=0;i<text.length;i++){const c=text[i],next=text[i+1];if(inQuotes){if(c==='"'&&next==='"'){field+='"';i++}else if(c==='"'){inQuotes=false}else field+=c}else{if(c==='"')inQuotes=true;else if(c===','){row.push(field);field=''}else if(c===`\n`){row.push(field);rows.push(row);row=[];field=''}else if(c!=='\r')field+=c}}if(field||row.length){row.push(field);rows.push(row)}return rows}
-    function csvToObjects(text){const rows=parseCSV(text);if(!rows.length)return[];const header=rows[0].map(h=>h.trim());const norm=header.map(h=>h.replace(/\s+/g,'_').toUpperCase());const out=[];for(let i=1;i<rows.length;i++){const r=rows[i];if(!r||r.every(x=>!x||!x.trim()))continue;const obj={};for(let j=0;j<norm.length;j++)obj[norm[j]]=(r[j]??'').trim();out.push(obj)}return out}
-    async function renderFromCSV(tableId,csvUrl,mapObjToCells){const text=await fetch(csvUrl).then(r=>r.text());const data=csvToObjects(text);const tbody=document.querySelector(`#${tableId} tbody`);tbody.innerHTML='';data.forEach(obj=>{const tr=document.createElement('tr');mapObjToCells(obj).forEach(cell=>{const td=document.createElement('td');if(cell&&cell.__html__)td.innerHTML=cell.__html__;else td.textContent=cell??'';tr.appendChild(td)});tbody.appendChild(tr)})}
-    function setSortIndicator(th,dir){th.parentElement.querySelectorAll('th.sortable').forEach(h=>h.removeAttribute('data-sort'));if(dir)th.setAttribute('data-sort',dir)}
-    function sortTable(table,col,type,th){const tbody=table.tBodies[0],rows=Array.from(tbody.rows);const asc=!table.asc;rows.sort((a,b)=>{const A=a.cells[col].innerText.trim(),B=b.cells[col].innerText.trim();if(type==='number'){return asc?(+A-(+B)):(+B-(+A))}return asc?A.localeCompare(B):B.localeCompare(A)});rows.forEach(r=>tbody.appendChild(r));table.asc=asc;if(th)setSortIndicator(th,asc?'asc':'desc')}
-    function updateCveCount(){const n=document.getElementById('cve-table').tBodies[0].rows.length;document.getElementById('cve-count').textContent="Total CVEs: "+n}
+    function parseCSV(text){
+      const rows=[]; let row=[],field='',inQuotes=false;
+      for(let i=0;i<text.length;i++){
+        const c=text[i],next=text[i+1];
+        if(inQuotes){
+          if(c==='"'&&next==='"'){field+='"';i++}
+          else if(c==='"'){inQuotes=false}
+          else field+=c;
+        }else{
+          if(c==='"') inQuotes=true;
+          else if(c===','){ row.push(field); field='' }
+          else if(c===`\n`){ row.push(field); rows.push(row); row=[]; field='' }
+          else if(c!=='\r') field+=c;
+        }
+      }
+      if(field||row.length){ row.push(field); rows.push(row) }
+      return rows;
+    }
+    function csvToObjects(text){
+      const rows=parseCSV(text); if(!rows.length) return [];
+      const header=rows[0].map(h=>h.trim());
+      const norm=header.map(h=>h.replace(/\s+/g,'_').toUpperCase());
+      const out=[];
+      for(let i=1;i<rows.length;i++){
+        const r=rows[i]; if(!r||r.every(x=>!x||!x.trim())) continue;
+        const obj={}; for(let j=0;j<norm.length;j++) obj[norm[j]]=(r[j]??'').trim();
+        out.push(obj);
+      }
+      return out;
+    }
+    async function renderFromCSV(tableId,csvUrl,mapObjToCells){
+      const text=await fetch(csvUrl).then(r=>r.text());
+      const data=csvToObjects(text);
+      const tbody=document.querySelector(`#${tableId} tbody`);
+      tbody.innerHTML='';
+      data.forEach(obj=>{
+        const tr=document.createElement('tr');
+        mapObjToCells(obj).forEach(cell=>{
+          const td=document.createElement('td');
+          if(cell&&cell.__html__) td.innerHTML=cell.__html__;
+          else td.textContent=cell??'';
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+    }
+    function setSortIndicator(th,dir){
+      th.parentElement.querySelectorAll('th.sortable').forEach(h=>h.removeAttribute('data-sort'));
+      if(dir) th.setAttribute('data-sort',dir);
+    }
+
+    function compareCVE(aText,bText,asc){
+      const parse = (s)=>{
+        const m = s.trim().match(/^CVE-(\d{4})-(\d{1,})$/i);
+        return m ? {year: parseInt(m[1],10), num: parseInt(m[2],10)} : null;
+      };
+      const A=parse(aText), B=parse(bText);
+      if(A && B){
+        if(A.year!==B.year) return asc ? (A.year-B.year) : (B.year-A.year);
+        if(A.num!==B.num) return asc ? (A.num-B.num) : (B.num-A.num);
+        return 0;
+      }
+      // Fallback to plain string compare if either side doesn't match the pattern
+      return asc ? aText.localeCompare(bText) : bText.localeCompare(aText);
+    }
+
+    function sortTable(table,col,type,th){
+      const tbody=table.tBodies[0];
+      const rows=Array.from(tbody.rows);
+      const asc = !table.asc; // toggle per-table
+      rows.sort((a,b)=>{
+        const A=a.cells[col].innerText.trim();
+        const B=b.cells[col].innerText.trim();
+        if(type==='number'){
+          const nA=parseFloat(A), nB=parseFloat(B);
+          const NA=isNaN(nA), NB=isNaN(nB);
+          if(NA && NB) return 0;
+          if(NA) return asc ? 1 : -1; // NaNs go last when ascending
+          if(NB) return asc ? -1 : 1;
+          return asc ? (nA-nB) : (nB-nA);
+        }
+        if(type==='cve'){
+          return compareCVE(A,B,asc);
+        }
+        // default string
+        return asc ? A.localeCompare(B) : B.localeCompare(A);
+      });
+      rows.forEach(r=>tbody.appendChild(r));
+      table.asc = asc;
+      if(th) setSortIndicator(th, asc ? 'asc' : 'desc');
+    }
+
+    function updateCveCount(){
+      const n=document.getElementById('cve-table').tBodies[0].rows.length;
+      document.getElementById('cve-count').textContent="Total CVEs: "+n;
+    }
+
     document.addEventListener('DOMContentLoaded', async ()=> {
       await renderFromCSV('cve-table','cves.csv',obj=>{
         const id=obj.ID||'', soft=obj.SOFTWARE||'', cwe=obj.CWE||'', score=obj.SCORE||'', severity=obj.SEVERITY||'';
@@ -180,8 +270,10 @@
         return [id,soft,cwe,score,severity,{__html__:refs.join(' ')}];
       });
       updateCveCount();
-      const cveTable=document.getElementById('cve-table'); cveTable.asc=true;
-      sortTable(cveTable,0,'string', cveTable.tHead.rows[0].cells[0]);
+
+      const cveTable=document.getElementById('cve-table');
+      cveTable.asc=true; // so first click will flip to desc; we call sort once manually:
+      sortTable(cveTable,0,'cve', cveTable.tHead.rows[0].cells[0]);
 
       await renderFromCSV('ctf-table','ctfs.csv',obj=>{
         const name=obj.NAME||'', company=obj.COMPANY||'';

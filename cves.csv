@@ -1,4 +1,6 @@
 ID,Software,CWE,Score,Severity,CVE_URL,WRITEUP_URL,EXPLOIT_URL
+CVE-2025-9485,OAuth Single Sign On – SSO (OAuth Client), CWE-347 Improper Verification of Cryptographic Signature ,9.8,Critical,https://www.cve.org/CVERecord?id=CVE-2025-9485,,
+CVE-2025-10746,Integrate Dynamics 365 CRM,CWE-862 Missing Authorization,6.5,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10746,,
 CVE-2025-9885,MPWizard,CWE-352 Cross-Site Request Forgery (CSRF),4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-9885,,
 CVE-2025-10306,Backup Bolt,CWE-73: External Control of File Name or Path,3.8,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10306,,
 CVE-2025-9889,ContentMX Content Publisher,CWE-352 Cross-Site Request Forgery (CSRF),4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-9889,,

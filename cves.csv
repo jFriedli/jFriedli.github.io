@@ -1,7 +1,7 @@
 ID,Software,CWE,Score,Severity,CVE_URL,WRITEUP_URL,EXPLOIT_URL
 CVE-2025-9885,MPWizard,CWE-352 Cross-Site Request Forgery (CSRF),4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-9885,,
 CVE-2025-10306,Backup Bolt,CWE-73: External Control of File Name or Path,3.8,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10306,,
-CVE-2025-9889,ContentMX Content Publisher,OAuth Single Sign On – SSO (OAuth Client),CWE-352 Cross-Site Request Forgery (CSRF),4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-9889,,
+CVE-2025-9889,ContentMX Content Publisher,CWE-352 Cross-Site Request Forgery (CSRF),4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-9889,,
 CVE-2025-10053,TableGen – Data Table Generator,"CWE-79 Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",4.4,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10053,,
 CVE-2025-9333,Smart Docs,"CWE-79 Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",5.5,Medium,https://www.cve.org/CVERecord?id=CVE-2025-9333,,
 CVE-2025-9332,Interactive Medical Drawing of Human Body,"CWE-79 Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",5.5,Medium,https://www.cve.org/CVERecord?id=CVE-2025-9332,,

@@ -1,4 +1,5 @@
 ID,Software,CWE,Score,Severity,CVE_URL,WRITEUP_URL,EXPLOIT_URL
+CVE-2025-11701,Zip Attachments,CWE-862 Missing Authorization,5.4,Medium,https://www.cve.org/CVERecord?id=CVE-2025-11701,,
 CVE-2025-10294,OwnID Passwordless Login,CWE-288 Authentication Bypass Using an Alternate Path or Channel,9.8,Critical,https://www.cve.org/CVERecord?id=CVE-2025-10294,,
 CVE-2025-11692,Zip Attachments,CWE-862 Missing Authorization,5.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-11692,,
 CVE-2025-11728,Oceanpayment CreditCard Gateway,CWE-306 Missing Authentication for Critical Function,5.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-11728,,

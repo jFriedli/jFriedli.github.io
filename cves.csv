@@ -1,4 +1,5 @@
 ID,Software,CWE,Score,Severity,CVE_URL,WRITEUP_URL,EXPLOIT_URL
+CVE-2025-11895,Binary MLM Plan,CWE-639 Authorization Bypass Through User-Controlled Key,4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-11895,,
 CVE-2025-10750,PowerBI Embed Reports,CWE-200 Exposure of Sensitive Information to an Unauthorized Actor,5.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10750,,
 CVE-2025-11256,Kognetiks Chatbot,CWE-285 Improper Authorization,5.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-11256,,
 CVE-2025-9890,Theme Editor,CWE-352 Cross-Site Request Forgery (CSRF),8.8,High,https://www.cve.org/CVERecord?id=CVE-2025-9890,,

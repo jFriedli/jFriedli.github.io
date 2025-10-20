@@ -1,4 +1,7 @@
 ID,Software,CWE,Score,Severity,CVE_URL,WRITEUP_URL,EXPLOIT_URL
+CVE-2025-10750,PowerBI Embed Reports,CWE-200 Exposure of Sensitive Information to an Unauthorized Actor,5.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10750,,
+CVE-2025-11256,Kognetiks Chatbot,CWE-285 Improper Authorization,5.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-11256,,
+CVE-2025-9890,Theme Editor,CWE-352 Cross-Site Request Forgery (CSRF),8.8,High,https://www.cve.org/CVERecord?id=CVE-2025-9890,,
 CVE-2025-11701,Zip Attachments,CWE-862 Missing Authorization,5.4,Medium,https://www.cve.org/CVERecord?id=CVE-2025-11701,,
 CVE-2025-10294,OwnID Passwordless Login,CWE-288 Authentication Bypass Using an Alternate Path or Channel,9.8,Critical,https://www.cve.org/CVERecord?id=CVE-2025-10294,,
 CVE-2025-11692,Zip Attachments,CWE-862 Missing Authorization,5.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-11692,,

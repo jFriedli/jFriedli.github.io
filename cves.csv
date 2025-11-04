@@ -1,5 +1,11 @@
 ID,Software,CWE,Score,Severity,CVE_URL,WRITEUP_URL,EXPLOIT_URL
-CVE-2025-11257,LLM Hubspot Blog Import,CWE-862 Missing Authorization,4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-11257,,
+CVE-2025-10145,Auto Featured Image (Auto Post Thumbnail),CWE-918 Server-Side Request Forgery (SSRF),7.7,High,https://www.cve.org/CVERecord?id=CVE-2025-10145,,
+CVE-2025-12094,OOPSpam Anti-Spam,CWE-693 Protection Mechanism Failure,5.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-12094,,
+CVE-2025-12115,WPC Name Your Price for WooCommerce,CWE-602 Client-Side Enforcement of Server-Side Security,7.5,High,https://www.cve.org/CVERecord?id=CVE-2025-12115,,
+CVE-2025-11975,FuseWP,CWE-862 Missing Authorization,4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-11975,,
+CVE-2025-11983,WP Discourse,CWE-200 Exposure of Sensitive Information to an Unauthorized Actor,4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-11983,,
+CVE-2025-12137,Import WP,CWE-73 External Control of File Name or Path,4.9,Medium,https://www.cve.org/CVERecord?id=CVE-2025-12137,,
+CVE-2025-11890,Crypto Payment Gateway with Payeer for WooCommerce,CWE-862 Missing Authorization,7.5,High,https://www.cve.org/CVERecord?id=CVE-2025-11890,,
 CVE-2025-11257,LLM Hubspot Blog Import,CWE-862 Missing Authorization,4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-11257,,
 CVE-2025-11576,AI Chatbot Free Models,CWE-1236 Improper Neutralization of Formula Elements in a CSV File,4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-11576,,
 CVE-2025-10901,Originality.ai AI Checker,CWE-862 Missing Authorization,4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10901,,

@@ -1,4 +1,6 @@
 ID,Software,CWE,Score,Severity,CVE_URL,WRITEUP_URL,EXPLOIT_URL
+CVE-2025-10902,Originality.ai AI Checker,CWE-285 Improper Authorization,4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10902,,
+CVE-2025-11627,Site Checkup AI Troubleshooting with Wizard and Tips for Each Issue,CWE-117 Improper Output Neutralization for Logs,6.5,Medium,https://www.cve.org/CVERecord?id=CVE-2025-11627,,
 CVE-2025-10145,Auto Featured Image (Auto Post Thumbnail),CWE-918 Server-Side Request Forgery (SSRF),7.7,High,https://www.cve.org/CVERecord?id=CVE-2025-10145,,
 CVE-2025-12094,OOPSpam Anti-Spam,CWE-693 Protection Mechanism Failure,5.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-12094,,
 CVE-2025-12115,WPC Name Your Price for WooCommerce,CWE-602 Client-Side Enforcement of Server-Side Security,7.5,High,https://www.cve.org/CVERecord?id=CVE-2025-12115,,

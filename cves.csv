@@ -1,4 +1,6 @@
 ID,Software,CWE,Score,Severity,CVE_URL,WRITEUP_URL,EXPLOIT_URL
+CVE-2025-8084,AI Engine,CWE-918 Server-Side Request Forgery (SSRF),6.8,Medium,https://www.cve.org/CVERecord?id=CVE-2025-8084,,
+CVE-2025-11620,Multiple Roles per User,CWE-862 Missing Authorization,7.2,High,https://www.cve.org/CVERecord?id=CVE-2025-11620,,
 CVE-2025-64758,OWASP Dependency-Track,CWE-79 Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting'),4.8,Medium,https://www.cve.org/CVERecord?id=CVE-2025-64758,,
 CVE-2025-11260,WP Headless CMS Framework,CWE-693 Protection Mechanism Failure,5.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-11260,,
 CVE-2025-11454,Specific Content For Mobile,CWE-89 Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection'),6.5,Medium,https://www.cve.org/CVERecord?id=CVE-2025-11454,,

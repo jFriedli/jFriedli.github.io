@@ -601,3 +601,76 @@ canvas {
   position: relative;
   z-index: 1;
 }
+
+/* 3D spinning donut for severity distribution */
+.spin-container {
+  perspective: 600px;
+}
+
+/*
+ * Multi‑layer donut container for the severity distribution.
+ * Each severity slice is drawn on its own canvas and separated
+ * along the Z axis to simulate physical thickness.  The entire
+ * donut rotates in 3D space using the same keyframes as the
+ * original 2D donut animation.  A fixed height ensures the
+ * donut always reserves sufficient vertical space regardless of
+ * content above or below.
+ */
+.donut3d {
+  /* Legacy multi-layer donut container.  No longer used for the
+     severity distribution now that the torus is drawn via a single
+     canvas.  Retain basic sizing in case of future reuse but
+     remove 3D animation and preserve-3d to avoid unintended
+     transforms. */
+  position: relative;
+  width: 100%;
+  height: 260px;
+  transform-style: flat;
+  animation: none;
+}
+
+/* Individual canvases within the 3D donut.  They are absolutely
+   positioned to stack directly on top of one another and share
+   the parent’s dimensions.  Each canvas is translated along the
+   Z axis in JavaScript to create thickness. */
+.donut3d canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: flat;
+}
+
+canvas.spin {
+  display: block;
+  transform-style: preserve-3d;
+  transform-origin: 50% 50%;
+  animation: donut-spin 18s linear infinite;
+}
+
+@keyframes donut-spin {
+  /* Spin the donut mostly around the Y axis with a modest tilt on
+     the X axis.  A smaller tilt angle preserves the 3D illusion
+     without causing the layers to separate visually. */
+  from {
+    transform: rotateX(30deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(30deg) rotateY(360deg);
+  }
+}
+
+/* Canvas used for the 3D torus.  The dimensions are controlled via
+   CSS so that the canvas scales responsively while the internal
+   drawing resolution is set in JavaScript. */
+/* Canvas used for the 3D torus.  Constrain its aspect ratio so
+   that the canvas remains square and the torus does not appear
+   distorted when scaled.  Width scales with its container and
+   height adjusts automatically. */
+.donut-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}

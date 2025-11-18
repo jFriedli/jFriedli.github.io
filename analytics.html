@@ -25,7 +25,12 @@
             <h3>Common Vulnerability Scoring System Radar</h3>
             <canvas id="heatmapCanvas"></canvas>
             <h3>Severity distribution</h3>
-            <canvas id="severityCanvas"></canvas>
+            <!-- Severity distribution rendered as a 3D torus on a single canvas. -->
+            <div class="spin-container">
+              <!-- Canvas for the rotating 3D donut.  Its resolution is set via
+                   JavaScript and it scales to fill the available space. -->
+              <canvas id="severityTorus" class="donut-canvas"></canvas>
+            </div>
             <div id="sevLegend" class="legend"></div>
           </div>
           <div class="split-item">

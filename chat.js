@@ -552,7 +552,7 @@ function initGlobe() {
       globeController.setMode('fast');
       setTimeout(() => {
         globeController.setMode('cooldown');
-      }, 700);
+      }, 2500);
     });
   }
 }

@@ -59,7 +59,7 @@ const LINK_TOKEN_MAP = {
 
 // Regex that finds any of the link tokens
 const LINK_TOKEN_REGEX =
-  /\[(LINKEDIN|GITHUB|EXPLOIT_DB|WORDFENCE|KAGGLE|MEDIUM|MUSIC)\]/g;
+  /\[(LINKEDIN|GITHUB|EXPLOIT_DB|WORDFENCE|KAGGLE|MEDIUM|MUSIC)\]/;
 
 // Render a text string into a span, replacing tokens with <a> elements
 function renderTextWithLinks(targetSpan, text) {
@@ -219,60 +219,60 @@ function initChat() {
 
   /* --- Backend handling --- */
 
-  async function handleBackend(userText) {
-    try {
-      const raw = await callBackend(userText);
-      const finalText = (raw || '').trim();
+async function handleBackend(userText) {
+  try {
+    const raw = await callBackend(userText);
+    const finalText = (raw || '').trim();
 
-      // use match instead of .test on the global regex
-      const hasLinkTokens = finalText.match(LINK_TOKEN_REGEX) !== null;
+    // simple detection, safe because regex is not global
+    const hasLinkTokens = LINK_TOKEN_REGEX.test(finalText);
 
-      if (!currentBotSpan) {
-        currentBotSpan = appendRow('', 'bot');
-      }
-
-      // transition from orange fast to green with overspin
-      if (globeController) globeController.setMode('cooldown');
-
-      if (hasLinkTokens) {
-        const textToShow = finalText;
-
-        // first type out the raw text (tokens included)
-        typeWithCursor(currentBotSpan, textToShow, () => {
-          currentBotSpan.classList.remove('loading');
-
-          // then replace the tokens with real <a> links
-          renderTextWithLinks(currentBotSpan, textToShow);
-
-          const chatLog = document.getElementById('chat-log');
-          if (chatLog) chatLog.scrollTop = chatLog.scrollHeight;
-
-          currentBotSpan = null;
-          isGenerating = false;
-          enableInput();
-        }, 18);
-      } else {
-        const displayText = finalText;
-
-        typeWithCursor(currentBotSpan, displayText, () => {
-          currentBotSpan.classList.remove('loading');
-          currentBotSpan = null;
-          isGenerating = false;
-          enableInput();
-        }, 18);
-      }
-
-    } catch (err) {
-      console.error(err);
-      if (!currentBotSpan) currentBotSpan = appendRow('', 'bot');
-      currentBotSpan.textContent = '[ERROR] Link to remote node failed.';
-      currentBotSpan.classList.remove('loading');
-      currentBotSpan = null;
-      isGenerating = false;
-      enableInput();
-      if (globeController) globeController.setMode('idle');
+    if (!currentBotSpan) {
+      currentBotSpan = appendRow('', 'bot');
     }
+
+    // transition from orange fast to green with overspin
+    if (globeController) globeController.setMode('cooldown');
+
+    if (hasLinkTokens) {
+      const textToShow = finalText;
+
+      // 1) type out the raw text (tokens included)
+      typeWithCursor(currentBotSpan, textToShow, () => {
+        currentBotSpan.classList.remove('loading');
+
+        // 2) then replace tokens with real <a> links in-place
+        renderTextWithLinks(currentBotSpan, textToShow);
+
+        const chatLog = document.getElementById('chat-log');
+        if (chatLog) chatLog.scrollTop = chatLog.scrollHeight;
+
+        currentBotSpan = null;
+        isGenerating = false;
+        enableInput();
+      }, 18);
+    } else {
+      const displayText = finalText;
+
+      typeWithCursor(currentBotSpan, displayText, () => {
+        currentBotSpan.classList.remove('loading');
+        currentBotSpan = null;
+        isGenerating = false;
+        enableInput();
+      }, 18);
+    }
+  } catch (err) {
+    console.error(err);
+    if (!currentBotSpan) currentBotSpan = appendRow('', 'bot');
+    currentBotSpan.textContent = '[ERROR] Link to remote node failed.';
+    currentBotSpan.classList.remove('loading');
+    currentBotSpan = null;
+    isGenerating = false;
+    enableInput();
+    if (globeController) globeController.setMode('idle');
   }
+}
+
 
   /* --- transmit sequence (no terminal overlay per message) --- */
 

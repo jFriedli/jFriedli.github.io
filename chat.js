@@ -224,7 +224,8 @@ function initChat() {
       const raw = await callBackend(userText);
       const finalText = (raw || '').trim();
 
-      const hasLinkTokens = LINK_TOKEN_REGEX.test(finalText);
+      // use match instead of .test on the global regex
+      const hasLinkTokens = finalText.match(LINK_TOKEN_REGEX) !== null;
 
       if (!currentBotSpan) {
         currentBotSpan = appendRow('', 'bot');
@@ -234,16 +235,22 @@ function initChat() {
       if (globeController) globeController.setMode('cooldown');
 
       if (hasLinkTokens) {
-        // For link-bearing answers, render text + <a> tags directly
-        currentBotSpan.classList.remove('loading');
-        renderTextWithLinks(currentBotSpan, finalText);
+        const textToShow = finalText;
 
-        const chatLog = document.getElementById('chat-log');
-        if (chatLog) chatLog.scrollTop = chatLog.scrollHeight;
+        // first type out the raw text (tokens included)
+        typeWithCursor(currentBotSpan, textToShow, () => {
+          currentBotSpan.classList.remove('loading');
 
-        currentBotSpan = null;
-        isGenerating = false;
-        enableInput();
+          // then replace the tokens with real <a> links
+          renderTextWithLinks(currentBotSpan, textToShow);
+
+          const chatLog = document.getElementById('chat-log');
+          if (chatLog) chatLog.scrollTop = chatLog.scrollHeight;
+
+          currentBotSpan = null;
+          isGenerating = false;
+          enableInput();
+        }, 18);
       } else {
         const displayText = finalText;
 
@@ -254,6 +261,7 @@ function initChat() {
           enableInput();
         }, 18);
       }
+
     } catch (err) {
       console.error(err);
       if (!currentBotSpan) currentBotSpan = appendRow('', 'bot');

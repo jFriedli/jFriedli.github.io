@@ -23,6 +23,68 @@ let globeController = null;
 // boot callback – set by initChat, used by initGlobe when intro terminal finishes
 let bootCompleteHandler = null;
 
+/* --------------- LINK TOKEN HANDLING --------------- */
+
+// Map from tokens the model emits to real links
+const LINK_TOKEN_MAP = {
+  '[LINKEDIN]': {
+    text: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/jonas-benjamin-friedli/'
+  },
+  '[GITHUB]': {
+    text: 'GitHub',
+    href: 'https://github.com/jFriedli'
+  },
+  '[EXPLOIT_DB]': {
+    text: 'Exploit-DB',
+    href: 'https://www.exploit-db.com/?author=12089'
+  },
+  '[WORDFENCE]': {
+    text: 'Wordfence',
+    href: 'https://www.wordfence.com/threat-intel/vulnerabilities/researchers/jonas-benjamin-friedli'
+  },
+  '[KAGGLE]': {
+    text: 'Kaggle',
+    href: 'https://www.kaggle.com/jbfriedli'
+  },
+  '[MEDIUM]': {
+    text: 'Medium',
+    href: 'https://medium.com/@jonas.friedli'
+  },
+  '[MUSIC]': {
+    text: 'Music',
+    href: 'https://li.sten.to/8beznzex'
+  }
+};
+
+// Regex that finds any of the link tokens
+const LINK_TOKEN_REGEX =
+  /\[(LINKEDIN|GITHUB|EXPLOIT_DB|WORDFENCE|KAGGLE|MEDIUM|MUSIC)\]/g;
+
+// Render a text string into a span, replacing tokens with <a> elements
+function renderTextWithLinks(targetSpan, text) {
+  targetSpan.textContent = ''; // clear existing content
+
+  const parts = text.split(
+    /(\[LINKEDIN\]|\[GITHUB\]|\[EXPLOIT_DB\]|\[WORDFENCE\]|\[KAGGLE\]|\[MEDIUM\]|\[MUSIC\])/
+  );
+
+  parts.forEach(part => {
+    const def = LINK_TOKEN_MAP[part];
+    if (def) {
+      const a = document.createElement('a');
+      a.href = def.href;
+      a.textContent = def.text;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.className = 'reference'; // optional: reuse table link styling
+      targetSpan.appendChild(a);
+    } else if (part) {
+      targetSpan.appendChild(document.createTextNode(part));
+    }
+  });
+}
+
 /* --------------- UTILITIES --------------- */
 
 // type text character by character into target element (plain text only)
@@ -108,12 +170,7 @@ function initChat() {
     body.className = 'message-body';
 
     // User messages are always plain text for safety
-    // Bot messages may later be filled with HTML when needed
-    if (author === 'user') {
-      body.textContent = text;
-    } else {
-      body.textContent = text;
-    }
+    body.textContent = text;
 
     row.appendChild(label);
     row.appendChild(body);
@@ -141,7 +198,6 @@ function initChat() {
 
   // boot message is shown only after the boot terminal animation finishes
   bootCompleteHandler = () => {
-    
     const bootSpan = appendRow('', 'bot');
     const bootMsg =
       'Link established. Remote JONAS-LINK uplink online. Intel feed is probabilistic.';
@@ -159,7 +215,6 @@ function initChat() {
         typeWithCursor(statusSpan, 'Active', null, 40);
       }
     }, 18);
-
   };
 
   /* --- Backend handling --- */
@@ -169,7 +224,7 @@ function initChat() {
       const raw = await callBackend(userText);
       const finalText = (raw || '').trim();
 
-      const hasHTMLLinks = /<a\s+href=/i.test(finalText);
+      const hasLinkTokens = LINK_TOKEN_REGEX.test(finalText);
 
       if (!currentBotSpan) {
         currentBotSpan = appendRow('', 'bot');
@@ -178,10 +233,10 @@ function initChat() {
       // transition from orange fast to green with overspin
       if (globeController) globeController.setMode('cooldown');
 
-      if (hasHTMLLinks) {
-        // Render HTML directly so <a> tags become clickable
+      if (hasLinkTokens) {
+        // For link-bearing answers, render text + <a> tags directly
         currentBotSpan.classList.remove('loading');
-        currentBotSpan.innerHTML = finalText;
+        renderTextWithLinks(currentBotSpan, finalText);
 
         const chatLog = document.getElementById('chat-log');
         if (chatLog) chatLog.scrollTop = chatLog.scrollHeight;

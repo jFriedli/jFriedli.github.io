@@ -34,8 +34,9 @@
   max-width: 1200px;
   margin: 8px auto 4px;
   box-sizing: border-box;
+  min-height: 60vh;
+  align-items: stretch;
 }
-
 .chat-panel {
   flex: 2 1 380px;
   display: flex;
@@ -46,17 +47,19 @@
     inset 0 0 0 1px rgba(0, 230, 118, 0.05),
     0 6px 12px rgba(0, 0, 0, 0.45);
   border-radius: 6px;
-  min-height: 420px; 
+  min-height: 420px;
 }
 
 .chat-log {
   flex: 1 1 auto;
+  min-height: 0;
   padding: 10px 12px;
   overflow-y: auto;
   font-size: 0.9rem;
   line-height: 1.4;
   letter-spacing: 0.4px;
 }
+
 
 /* simple terminal-style rows */
 
@@ -174,6 +177,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  flex: 1 1 0;   /* NEW: lets globe grow to fill remaining column height */
   min-height: 260px;
 }
 

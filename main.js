@@ -1,10 +1,3 @@
-/*
- * Common JavaScript for the home/index page.  This module contains
- * CSV parsing utilities, table rendering functions and sortable
- * column helpers.  Keeping this logic in a separate file allows the
- * HTML to remain clean and both pages to share parsing code if needed.
- */
-
 /* Parse a CSV string into an array of rows (each row is an array of
    strings). Quoted values and escaped quotes are handled. */
 function parseCSV(text) {

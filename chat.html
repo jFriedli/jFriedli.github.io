@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat</title>
+  <link rel="stylesheet" href="crt.css">
+  <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+  
+  <div class="grid-bg"></div>
+
+  <div class="screen-wrap rgb-bleed">
+    <!-- Header line -->
+    <header class="chat-header">
+      <a id="back-button" href="/index.html">◀ BACK</a>
+      <div class="chat-title">TERMINAL / LINK CHANNEL</div>
+      <div id="model-status" class="model-status">MODEL: booting…</div>
+    </header>
+
+    <main class="chat-main">
+      <!-- LEFT: Chat -->
+      <section class="chat-panel">
+        <div id="chat-log" class="chat-log" aria-label="Chat log"></div>
+
+        <!-- Input row at the bottom -->
+        <form id="chat-form" class="chat-form" autocomplete="off">
+          <input
+            type="text"
+            id="chat-input"
+            class="chat-input"
+            placeholder="Type your message..."
+            autocomplete="off"
+          />
+          <button type="submit" class="send-btn">Send</button>
+        </form>
+      </section>
+
+      <!-- RIGHT: Operator + Globe -->
+      <aside class="info-panel">
+        <div class="info-section">
+          <h3>Operator</h3>
+          <div class="operator-card">
+            <div class="operator-photo"><img src="./operator.png"></div>
+            <div class="operator-details">
+              <p><strong>Name:</strong> <span id="op-name">Jonas Benjamin Friedli</span></p>
+              <p><strong>Role:</strong> <span id="op-role">Information Security</span></p>
+              <p><strong>Status:</strong> <span id="op-status">Inactive</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="globe-section">
+          <!-- Rotating globe -->
+          <canvas
+            id="globe-canvas"
+            width="260"
+            height="260"
+            aria-label="Rotating globe"
+          ></canvas>
+
+          <!-- Overlay terminal text for transmission animation -->
+          <div id="globe-terminal" class="globe-terminal">
+            <div id="globe-terminal-title" class="globe-terminal-title">
+              LINK PIPELINE
+            </div>
+            <div id="globe-terminal-text" class="globe-terminal-text"></div>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Operator brief panel under everything -->
+    <section class="brief-section">
+      <h3 class="brief-title">Operator Brief</h3>
+      <div id="operator-brief" class="brief-body">
+        Jonas Benjamin Friedli – software engineer turned application security engineer.
+        Builds distributed systems, breaks apps, and occasionally publishes CVEs. </br></br>
+        NOTICE: This terminal imitates but does not represent.
+      </div>
+    </section>
+  </div>
+
+  <div class="crt"></div>
+
+  <script type="module" src="chat.js"></script>
+</body>
+</html>

@@ -1,30 +1,17 @@
-/* Common CRT-style theme for both index and analytics pages */
-/*
-   This stylesheet centralizes the retro terminal look used on the home page
-   (index) and analytics dashboard. It defines the phosphorescent green
-   colour palette, grid background and CRT overlay effects, as well as
-   structural styles for cards, tables and ranking lists. By extracting
-   these rules into a standalone file, both pages can share the same
-   aesthetic without duplicating code.
-*/
-
-/* Colour variables inspired by vintage monochrome monitors */
 :root {
-  --bg: #020502;           /* page background */
-  --grid: #0c1f0c;         /* grid lines behind content */
-  --green: #00e676;        /* primary neon green */
-  --green-soft: #7cf6c1;   /* lighter accent */
-  --green-dim: #0bbf63;    /* dimmer mid tone */
-  --line: #0a2d18;         /* borders for cards and tables */
+  --bg: #020502;     
+  --grid: #0c1f0c;    
+  --green: #00e676;     
+  --green-soft: #7cf6c1;
+  --green-dim: #0bbf63; 
+  --line: #0a2d18;  
   --shadow: 0 0 12px rgba(0,230,118,.25), 0 0 24px rgba(0,230,118,.12);
   --shadow-strong: 0 0 18px rgba(0,230,118,.45), 0 0 42px rgba(0,230,118,.18);
-  --sev-low: #00e676;      /* severity colours reused in analytics */
+  --sev-low: #00e676;  
   --sev-medium: #eab308;
   --sev-high: #f97316;
   --sev-critical: #ef4444;
   --rank-track: rgba(0, 30, 18, .3);
-  /* Grid plane line colour used for the perspective floor at the bottom of the page */
-  /* Increase plane line visibility for a more pronounced horizon grid */
   --plane-line: rgba(0, 230, 118, 0.35);
 }
 
@@ -280,7 +267,7 @@ a.reference:hover {
 }
 
 /* Perspective grid plane on the bottom of the page.  This element
-   creates a three‑dimensional effect similar to a retro floor grid
+   creates a three-dimensional effect similar to a retro floor grid
    receding into the horizon.  It is positioned behind the main
    content and does not intercept pointer events. */
 .grid-plane {
@@ -328,7 +315,7 @@ a.reference:hover {
   /* Rotate along X axis to simulate the plane receding into the horizon */
   /* Tilt the grid slightly more and push it further down so the vanishing
      point is centred on the page.  Increasing translateY creates the
-     effect of the horizon meeting roughly at mid‑page. */
+     effect of the horizon meeting roughly at mid-page. */
   transform: rotateX(65deg) translateY(60%);
   /* Make the receding grid lines slightly brighter and sharper */
   opacity: 0.45;
@@ -556,6 +543,52 @@ canvas {
   border-color: rgba(0,230,118,.6);
   text-shadow: var(--shadow-strong);
 }
+
+/* NEW: hero chat button layout */
+.hero-actions {
+  margin-top: 3rem;
+}
+
+/* NEW: central chat button styled like a CRT control */
+.chat-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 2.1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(0,230,118,.7);
+  background: radial-gradient(circle at 50% 0%, rgba(0,230,118,.2), rgba(0,10,6,.7));
+  color: var(--green);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 0 14px rgba(0,230,118,.45), 0 0 32px rgba(0,230,118,.22);
+  text-shadow: 0 0 4px var(--green), 0 0 10px rgba(0,230,118,.7);
+  transition:
+    background 0.12s ease-out,
+    box-shadow 0.15s ease-out,
+    transform 0.08s ease-out,
+    letter-spacing 0.1s ease-out;
+}
+.chat-btn::before {
+  content: '▶';
+  font-size: 0.8rem;
+  margin-right: 0.6rem;
+  opacity: 0.9;
+}
+.chat-btn:hover {
+  background: radial-gradient(circle at 50% 0%, rgba(0,255,180,.45), rgba(0,20,10,.9));
+  box-shadow: var(--shadow-strong);
+  transform: translateY(-1px);
+  letter-spacing: 0.22em;
+}
+.chat-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 0 8px rgba(0,230,118,.3);
+}
+
 .scroll-down {
   position: absolute;
   bottom: 5%;
@@ -567,8 +600,8 @@ canvas {
  * Additional styling for the analytics heatmap section.  The
  * heatmap container has its own grid pattern drawn via CSS so
  * the background feels part of the radar visualization.  A
- * pseudo‑element sits behind the canvas to render the grid,
- * while the canvas is placed on top using a higher z‑index.
+ * pseudo-element sits behind the canvas to render the grid,
+ * while the canvas is placed on top using a higher z-index.
  */
 .heatmap-box {
   position: relative;
@@ -608,7 +641,7 @@ canvas {
 }
 
 /*
- * Multi‑layer donut container for the severity distribution.
+ * Multi-layer donut container for the severity distribution.
  * Each severity slice is drawn on its own canvas and separated
  * along the Z axis to simulate physical thickness.  The entire
  * donut rotates in 3D space using the same keyframes as the

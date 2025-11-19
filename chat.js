@@ -231,6 +231,9 @@ async function handleBackend(userText) {
       currentBotSpan = appendRow('', 'bot');
     }
 
+    // transition from orange fast to green with overspin
+    if (globeController) globeController.setMode('cooldown');
+
     if (hasLinkTokens) {
       const textToShow = finalText;
 
@@ -247,9 +250,6 @@ async function handleBackend(userText) {
         currentBotSpan = null;
         isGenerating = false;
         enableInput();
-
-        // 🔥 NOW we tell the globe to cool down: typing is finished
-        if (globeController) globeController.setMode('cooldown');
       }, 18);
     } else {
       const displayText = finalText;
@@ -259,9 +259,6 @@ async function handleBackend(userText) {
         currentBotSpan = null;
         isGenerating = false;
         enableInput();
-
-        // 🔥 Same here: only cool down after all text is typed
-        if (globeController) globeController.setMode('cooldown');
       }, 18);
     }
   } catch (err) {
@@ -275,7 +272,6 @@ async function handleBackend(userText) {
     if (globeController) globeController.setMode('idle');
   }
 }
-
 
 
   /* --- transmit sequence (no terminal overlay per message) --- */

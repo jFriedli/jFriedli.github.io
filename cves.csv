@@ -1,6 +1,6 @@
 ID,Software,CWE,Score,Severity,CVE_URL,WRITEUP_URL,EXPLOIT_URL
 CVE-2025-12115,WPC Name Your Price for WooCommerce,CWE-602 Client-Side Enforcement of Server-Side Security,7.5,High,https://www.cve.org/CVERecord?id=CVE-2025-12115,,
-CVE-2025-12130,WC Vendors,CWE-352 Cross-Site Request Forgery (CSRF),4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-12130,,,
+CVE-2025-12130,WC Vendors,CWE-352 Cross-Site Request Forgery (CSRF),4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-12130,,
 CVE-2025-11693,Export WP Page to Static HTML & PDF,CWE-200 Exposure of Sensitive Information to an Unauthorized Actor,9.8,Critical,https://www.cve.org/CVERecord?id=CVE-2025-11693,,
 CVE-2025-12128,Hide Categories Or Products On Shop Page,CWE-352 Cross-Site Request Forgery (CSRF),4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-12128,,
 CVE-2025-12129,CubeWP,CWE-200 Exposure of Sensitive Information to an Unauthorized Actor,5.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-12129,,

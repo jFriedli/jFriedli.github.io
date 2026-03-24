@@ -1,4 +1,11 @@
 ID,Software,CWE,Score,Severity,CVE_URL,WRITEUP_URL,EXPLOIT_URL
+CVE-2025-8781,Bookster – WordPress Appointment Booking Plugin,CWE-89 Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection'),4.9,Medium,https://www.cve.org/CVERecord?id=CVE-2025-8781,,
+CVE-2025-6792,One to one user Chat by WPGuppy,CWE-306 Missing Authentication for Critical Function,5.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-6792,,https://github.com/jFriedli/CVE-2025-6792
+CVE-2025-10753,OAuth Single Sign On – SSO (OAuth Client),5.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10753,,
+CVE-2025-11164,Mavix Education,CWE-862 Missing Authorization,4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-11164,,
+CVE-2025-11970,Emplibot,CWE-918 Server-Side Request Forgery (SSRF),4.4,Medium,https://www.cve.org/CVERecord?id=CVE-2025-11970,,
+CVE-2025-10304,Everest Backup,CWE-862 Missing Authorization,5.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10304,,
+CVE-2025-10144,Perfect Brands for WooCommerce,CWE-89 Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection'),6.5,Medium,https://www.cve.org/CVERecord?id=CVE-2025-10144,,
 CVE-2025-12115,WPC Name Your Price for WooCommerce,CWE-602 Client-Side Enforcement of Server-Side Security,7.5,High,https://www.cve.org/CVERecord?id=CVE-2025-12115,,
 CVE-2025-12130,WC Vendors,CWE-352 Cross-Site Request Forgery (CSRF),4.3,Medium,https://www.cve.org/CVERecord?id=CVE-2025-12130,,
 CVE-2025-11693,Export WP Page to Static HTML & PDF,CWE-200 Exposure of Sensitive Information to an Unauthorized Actor,9.8,Critical,https://www.cve.org/CVERecord?id=CVE-2025-11693,,

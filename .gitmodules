@@ -1,6 +1,3 @@
 [submodule "labs-src/cloth-simulation"]
 	path = labs-src/cloth-simulation
 	url = https://github.com/jFriedli/wasm-cloth-lab.git
-[submodule "labs-src/fluid-simulation"]
-	path = labs-src/fluid-simulation
-	url = https://github.com/jFriedli/wasm-fluid-lab.git

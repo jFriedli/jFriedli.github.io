@@ -1,6 +1,6 @@
 # Interactive labs
 
-The main website owns the labs index, pinned source revision, build orchestration, and Pages artifact. `labs-src/cloth-simulation` is an HTTPS Git submodule pointing to the independent `wasm-cloth-lab` repository. Only its compiled frontend is published at `/labs/cloth-simulation/`; its Rust/TypeScript source is not copied into `_site`.
+The main website owns the labs index, pinned source revisions, build orchestration, and Pages artifact. Standalone lab repositories are connected as HTTPS Git submodules under `labs-src/`: `cloth-simulation` points to `wasm-cloth-lab`, and `fluid-simulation` points to `wasm-fluid-lab`. Only compiled frontends are published under `/labs/<project>/`; Rust and TypeScript source are not copied into `_site`.
 
 ```sh
 git submodule update --init --recursive
@@ -8,6 +8,6 @@ git submodule update --init --recursive
 python3 -m http.server --directory _site 8000
 ```
 
-The build generates WASM, installs locked frontend dependencies, builds with `VITE_BASE=/labs/cloth-simulation/`, assembles the existing static site, and verifies the nested entry point and root `CNAME`. GitHub Actions performs the same operation and deploys `_site` through the official Pages actions.
+The build generates WASM, installs locked frontend dependencies, and supplies each project's base-path setting (`VITE_BASE=/labs/cloth-simulation/` or `VITE_BASE_PATH=/labs/fluid-simulation/`). It assembles the existing static site, verifies both nested entry points and the root `CNAME`, and rejects standalone/source paths in generated lab assets. GitHub Actions performs the same operation and deploys `_site` through the official Pages actions.
 
-To deliberately update the pinned lab revision, run `./scripts/update-cloth-lab.sh`, inspect the result, then commit the changed submodule pointer. Website deployments never pull an uncontrolled newer lab revision.
+To add another lab, add its public repository as an HTTPS submodule below `labs-src/`, extend `scripts/build-site.sh` with its documented build command and nested base path, copy its static output to `_site/labs/<project>/`, and add a matching card to `labs/index.html`. Website deployments never pull uncontrolled newer lab revisions; submodule commits are deliberately pinned. Use `./scripts/update-cloth-lab.sh` or `./scripts/update-fluid-lab.sh` to update an existing pin deliberately, rebuild, and review it before committing.

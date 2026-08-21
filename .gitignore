@@ -3,3 +3,7 @@
 /labs-src/cloth-simulation/web/node_modules/
 /labs-src/cloth-simulation/web/dist/
 /labs-src/cloth-simulation/web/src/wasm/
+/labs-src/fluid-simulation/target/
+/labs-src/fluid-simulation/web/node_modules/
+/labs-src/fluid-simulation/web/dist/
+/labs-src/fluid-simulation/web/src/wasm/

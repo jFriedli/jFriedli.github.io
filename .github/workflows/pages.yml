@@ -1,0 +1,55 @@
+name: Build and deploy website
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: labs-src/cloth-simulation
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: labs-src/cloth-simulation/web/package-lock.json
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: wasm-pack
+      - run: ./scripts/build-site.sh
+      - name: Validate Pages artifact
+        run: |
+          test -f _site/CNAME
+          grep -qx 'jfriedli.com' _site/CNAME
+          test -f _site/index.html
+          test -f _site/labs/index.html
+          test -f _site/labs/cloth-simulation/index.html
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

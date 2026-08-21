@@ -1,0 +1,5 @@
+/_site/
+/labs-src/cloth-simulation/target/
+/labs-src/cloth-simulation/web/node_modules/
+/labs-src/cloth-simulation/web/dist/
+/labs-src/cloth-simulation/web/src/wasm/

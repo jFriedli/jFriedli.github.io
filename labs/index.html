@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Interactive browser experiments by Jonas Friedli" />
+  <title>Interactive Labs · Jonas Friedli</title>
+  <link rel="stylesheet" href="../crt.css" />
+  <link rel="stylesheet" href="labs.css" />
+</head>
+<body>
+  <div class="screen-wrap rgb-bleed labs-shell">
+    <header class="labs-header">
+      <div><div class="prompt">jonas@home ~/labs $ ls</div><h1>Interactive Labs<span class="cursor"></span></h1></div>
+      <a class="analytics-btn" href="/">Home</a>
+    </header>
+    <main class="labs-grid">
+      <article class="term-card lab-card">
+        <div class="term-header"><div class="leds"><span class="led"></span><span class="led"></span><span class="led"></span></div>Cloth Simulation</div>
+        <div class="lab-body">
+          <p class="lab-stack">Rust · WebAssembly · XPBD · WebGL2</p>
+          <p>Grab the browser window and move it. Window motion becomes wind and inertia.</p>
+          <div class="lab-actions">
+            <a class="chat-btn" href="/labs/cloth-simulation/">Launch</a>
+            <a class="source-link" href="https://github.com/jFriedli/wasm-cloth-lab" target="_blank" rel="noopener noreferrer">Source ↗</a>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+  <div class="crt"></div>
+</body>
+</html>

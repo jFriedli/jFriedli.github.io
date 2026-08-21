@@ -1,0 +1,3 @@
+[submodule "labs-src/cloth-simulation"]
+	path = labs-src/cloth-simulation
+	url = https://github.com/jFriedli/wasm-cloth-lab.git

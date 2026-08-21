@@ -1,0 +1,14 @@
+.labs-shell { max-width: 1100px; margin: 0 auto; padding: clamp(32px, 7vw, 84px) 20px; }
+.labs-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 52px; }
+.labs-header h1 { color: var(--green); font-size: clamp(2rem, 6vw, 4.5rem); text-shadow: var(--shadow); }
+.labs-header .cursor { margin-left: .3ch; }
+.labs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: 24px; }
+.lab-card { margin: 0; }
+.lab-body { padding: 28px; min-height: 230px; display: flex; flex-direction: column; gap: 18px; }
+.lab-stack { color: var(--green-soft); font-size: .85rem; text-transform: uppercase; letter-spacing: .08em; }
+.lab-body p:not(.lab-stack) { color: var(--green); line-height: 1.7; max-width: 55ch; }
+.lab-actions { display: flex; align-items: center; gap: 22px; margin-top: auto; padding-top: 8px; }
+.lab-actions .chat-btn { padding: .6rem 1.4rem; }
+.source-link { color: var(--green-soft); text-decoration: none; border-bottom: 1px dashed rgba(0,230,118,.4); }
+.source-link:hover { text-shadow: var(--shadow-strong); }
+@media (max-width: 560px) { .labs-header { align-items: stretch; flex-direction: column; } .labs-header .analytics-btn { align-self: flex-start; margin-left: 0; } }

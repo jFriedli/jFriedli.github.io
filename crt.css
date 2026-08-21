@@ -547,6 +547,10 @@ canvas {
 /* NEW: hero chat button layout */
 .hero-actions {
   margin-top: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 }
 
 /* NEW: central chat button styled like a CRT control */

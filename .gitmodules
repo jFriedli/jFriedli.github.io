@@ -7,3 +7,6 @@
 [submodule "labs-src/path-tracing"]
 	path = labs-src/path-tracing
 	url = https://github.com/jFriedli/wasm-path-tracing-lab.git
+[submodule "labs-src/open-ebus-lab"]
+	path = labs-src/open-ebus-lab
+	url = https://github.com/jFriedli/open-ebus-lab.git

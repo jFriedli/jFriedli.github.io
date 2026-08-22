@@ -7,6 +7,7 @@
 .lab-body { padding: 28px; min-height: 230px; display: flex; flex-direction: column; gap: 18px; }
 .lab-stack { color: var(--green-soft); font-size: .85rem; text-transform: uppercase; letter-spacing: .08em; }
 .lab-body p:not(.lab-stack) { color: var(--green); line-height: 1.7; max-width: 55ch; }
+.lab-preview { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; border: 1px solid rgba(0,230,118,.35); filter: saturate(.8) contrast(1.05); }
 .lab-actions { display: flex; align-items: center; gap: 22px; margin-top: auto; padding-top: 8px; }
 .lab-actions .chat-btn { padding: .6rem 1.4rem; }
 .source-link { color: var(--green-soft); text-decoration: none; border-bottom: 1px dashed rgba(0,230,118,.4); }

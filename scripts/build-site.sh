@@ -5,6 +5,7 @@ repo_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 cloth_dir="$repo_dir/labs-src/cloth-simulation"
 fluid_dir="$repo_dir/labs-src/fluid-simulation"
 path_tracing_dir="$repo_dir/labs-src/path-tracing"
+ebus_dir="$repo_dir/labs-src/open-ebus-lab"
 site_dir="$repo_dir/_site"
 
 if [[ ! -f "$cloth_dir/Cargo.toml" ]]; then
@@ -19,6 +20,10 @@ if [[ ! -f "$path_tracing_dir/Cargo.toml" ]]; then
   echo "Path tracing submodule is missing. Run: git submodule update --init --recursive" >&2
   exit 1
 fi
+if [[ ! -f "$ebus_dir/Cargo.toml" ]]; then
+  echo "Open eBus Lab submodule is missing. Run: git submodule update --init --recursive" >&2
+  exit 1
+fi
 
 wasm-pack build "$cloth_dir/crates/cloth-wasm" --target web --out-dir ../../web/src/wasm
 npm ci --prefix "$cloth_dir/web"
@@ -30,6 +35,11 @@ VITE_BASE_PATH=/labs/fluid-simulation/ npm run build --prefix "$fluid_dir"
 npm ci --prefix "$path_tracing_dir/web"
 VITE_BASE_PATH=/labs/path-tracing/ npm run build --prefix "$path_tracing_dir"
 
+python3.13 -m venv "$ebus_dir/.venv313"
+"$ebus_dir/.venv313/bin/pip" install -r "$ebus_dir/requirements-dev.txt"
+npm ci --prefix "$ebus_dir/frontend"
+make -C "$ebus_dir" build-labs
+
 mkdir -p "$site_dir"
 find "$site_dir" -mindepth 1 -delete
 rsync -a --exclude '/.git/' --exclude '/.github/' --exclude '/.gitignore' --exclude '/.gitmodules' --exclude '/_site/' --exclude '/docs/' --exclude '/labs-src/' --exclude '/node_modules/' --exclude '/scripts/' "$repo_dir/" "$site_dir/"
@@ -39,12 +49,16 @@ mkdir -p "$site_dir/labs/fluid-simulation"
 rsync -a "$fluid_dir/web/dist/" "$site_dir/labs/fluid-simulation/"
 mkdir -p "$site_dir/labs/path-tracing"
 rsync -a "$path_tracing_dir/web/dist/" "$site_dir/labs/path-tracing/"
+mkdir -p "$site_dir/labs/open-ebus-lab"
+rsync -a "$ebus_dir/dist/labs/open-ebus-lab/" "$site_dir/labs/open-ebus-lab/"
+cp "$ebus_dir/captures/map-online-live.png" "$site_dir/labs/open-ebus-lab-card.png"
 
 test -f "$site_dir/index.html"
 test -f "$site_dir/labs/index.html"
 test -f "$site_dir/labs/cloth-simulation/index.html"
 test -f "$site_dir/labs/fluid-simulation/index.html"
 test -f "$site_dir/labs/path-tracing/index.html"
+test -f "$site_dir/labs/open-ebus-lab/index.html"
 test -f "$site_dir/CNAME"
 grep -qx 'jfriedli.com' "$site_dir/CNAME"
 if grep -R -n -E '/wasm-cloth-lab/|src/wasm' "$site_dir/labs/cloth-simulation"; then
@@ -57,6 +71,10 @@ if grep -R -n -E '/wasm-fluid-lab/|/labs/fluid/|src/wasm' "$site_dir/labs/fluid-
 fi
 if grep -R -n -E '/wasm-path-tracing-lab/|src/wasm' "$site_dir/labs/path-tracing"; then
   echo "Path tracing output contains an invalid standalone/source asset path" >&2
+  exit 1
+fi
+if grep -R -n -E '127\.0\.0\.1:8000|localhost|/api/|/ws' "$site_dir/labs/open-ebus-lab"; then
+  echo "Open eBus Lab output contains a forbidden runtime endpoint" >&2
   exit 1
 fi
 echo "Assembled Pages artifact: $site_dir"

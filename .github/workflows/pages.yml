@@ -26,17 +26,22 @@ jobs:
             labs-src/cloth-simulation
             labs-src/fluid-simulation
             labs-src/path-tracing
+            labs-src/open-ebus-lab
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
           cache-dependency-path: |
             labs-src/cloth-simulation/web/package-lock.json
             labs-src/fluid-simulation/web/package-lock.json
             labs-src/path-tracing/web/package-lock.json
+            labs-src/open-ebus-lab/frontend/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
       - uses: taiki-e/install-action@v2
         with:
-          tool: wasm-pack
+          tool: wasm-pack@0.14.0
       - run: ./scripts/build-site.sh
       - name: Validate Pages artifact
         run: |
@@ -47,6 +52,8 @@ jobs:
           test -f _site/labs/cloth-simulation/index.html
           test -f _site/labs/fluid-simulation/index.html
           test -f _site/labs/path-tracing/index.html
+          test -f _site/labs/open-ebus-lab/index.html
+          test -f _site/labs/open-ebus-lab-card.png
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

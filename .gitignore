@@ -7,3 +7,9 @@
 /labs-src/fluid-simulation/web/node_modules/
 /labs-src/fluid-simulation/web/dist/
 /labs-src/fluid-simulation/web/src/wasm/
+/labs-src/open-ebus-lab/.venv313/
+/labs-src/open-ebus-lab/.local/
+/labs-src/open-ebus-lab/target/
+/labs-src/open-ebus-lab/frontend/node_modules/
+/labs-src/open-ebus-lab/frontend/src/generated/
+/labs-src/open-ebus-lab/dist/

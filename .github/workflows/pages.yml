@@ -25,6 +25,7 @@ jobs:
           workspaces: |
             labs-src/cloth-simulation
             labs-src/fluid-simulation
+            labs-src/path-tracing
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -32,6 +33,7 @@ jobs:
           cache-dependency-path: |
             labs-src/cloth-simulation/web/package-lock.json
             labs-src/fluid-simulation/web/package-lock.json
+            labs-src/path-tracing/web/package-lock.json
       - uses: taiki-e/install-action@v2
         with:
           tool: wasm-pack
@@ -44,6 +46,7 @@ jobs:
           test -f _site/labs/index.html
           test -f _site/labs/cloth-simulation/index.html
           test -f _site/labs/fluid-simulation/index.html
+          test -f _site/labs/path-tracing/index.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -4,3 +4,6 @@
 [submodule "labs-src/fluid-simulation"]
 	path = labs-src/fluid-simulation
 	url = https://github.com/jFriedli/wasm-fluid-lab.git
+[submodule "labs-src/path-tracing"]
+	path = labs-src/path-tracing
+	url = https://github.com/jFriedli/wasm-path-tracing-lab.git

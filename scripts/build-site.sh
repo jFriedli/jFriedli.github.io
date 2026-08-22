@@ -42,7 +42,7 @@ make -C "$ebus_dir" build-labs
 
 mkdir -p "$site_dir"
 find "$site_dir" -mindepth 1 -delete
-rsync -a --exclude '/.git/' --exclude '/.github/' --exclude '/.gitignore' --exclude '/.gitmodules' --exclude '/_site/' --exclude '/docs/' --exclude '/labs-src/' --exclude '/node_modules/' --exclude '/scripts/' "$repo_dir/" "$site_dir/"
+rsync -a --exclude '/.git/' --exclude '/.github/' --exclude '/.gitignore' --exclude '/.gitmodules' --exclude '/_site/' --exclude '/captures/' --exclude '/docs/' --exclude '/labs-src/' --exclude '/node_modules/' --exclude '/scripts/' "$repo_dir/" "$site_dir/"
 mkdir -p "$site_dir/labs/cloth-simulation"
 rsync -a "$cloth_dir/web/dist/" "$site_dir/labs/cloth-simulation/"
 mkdir -p "$site_dir/labs/fluid-simulation"
